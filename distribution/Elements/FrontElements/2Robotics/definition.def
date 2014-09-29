@@ -1,0 +1,5 @@
+ISDIRECTORY = true
+CAPTION     = Robotics
+CAPTION_EN  = Robotics
+CAPTION_ES  = Robotics
+icon= icon32.png

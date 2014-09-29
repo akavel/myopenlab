@@ -1,0 +1,5 @@
+ISDIRECTORY = true
+CAPTION= Sound
+CAPTION_EN = Sound
+CAPTION_ES = Sonido
+ICON = Icon32.png
