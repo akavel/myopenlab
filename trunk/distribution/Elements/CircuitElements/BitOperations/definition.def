@@ -1,0 +1,5 @@
+ISDIRECTORY = TRUE
+CAPTION=    Bit-Operationen
+CAPTION_EN= Bit-Operations
+CAPTION_ES= Bit-Operationen
+Icon= icon32.png

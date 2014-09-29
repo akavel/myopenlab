@@ -1,0 +1,1 @@
+javaw -jar Simulator.jar

@@ -1,0 +1,6 @@
+ISDIRECTORY  = FALSE
+CAPTION      = FileSave Dialog
+CAPTION_EN   = FileSave Dialog
+CAPTION_ES   = FileSave Dialog
+ClassCircuit = SaveFile
+Icon         = bin/icon.gif

@@ -1,0 +1,6 @@
+ISDIRECTORY  = FALSE
+CAPTION      = Ellipse zeichnen
+CAPTION_EN   = Draw Ellipse
+CAPTION_ES   = Draw Ellipse
+ClassCircuit = DrawEllipse
+Icon         = bin/icon.gif
