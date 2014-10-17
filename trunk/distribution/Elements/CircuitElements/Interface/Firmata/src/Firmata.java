@@ -18,7 +18,6 @@
 //* along with this library; if not, write to the Free Software Foundation,   *
 //* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110, USA                  *
 //*****************************************************************************
-
 import VisualLogic.*;
 import VisualLogic.variables.*;
 
@@ -37,6 +36,7 @@ class MyTimer extends Thread {
 
     public boolean stop = false;
     public Firmata owner;
+    public int delay=200;
 
     @Override
     public void run() {
@@ -50,7 +50,7 @@ class MyTimer extends Thread {
                 //printDigitalInputs();                
                 processDigitalInputs();
 
-                Thread.sleep(100);
+                Thread.sleep(delay);
             } catch (InterruptedException ex) {
             }
         }
@@ -137,11 +137,15 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
     int inputPins = 0;
     int outputPins = 0;
 
+    public int oldDigitalPin[] = new int[100];
+    public int oldAnalogPin[] = new int[100];
+
     public int digitalOutputPort[] = new int[10];
 
     private Image image;
 
     String lines[] = null;
+    String[] allowedLines = null;
 
     private MyOpenLabDriverIF driver;
     private MyTimer timer;
@@ -149,7 +153,8 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
     public int digitalPort[] = new int[3];
 
     private VSPropertyDialog text = new VSPropertyDialog();
-    private VSPropertyDialog capatibilities_button = new VSPropertyDialog();
+    private VSInteger delay_processing_outputs = new VSInteger(200);
+    //private VSPropertyDialog capatibilities_button = new VSPropertyDialog();
 
     private VSString textVar = new VSString("");
 
@@ -164,8 +169,9 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
     public String[] outPinType;
 
     boolean debug = false;
+    long oldMillis = -999;
 
-    int oldAnalogValue[] = new int[20];
+    int oldAnalogValue[] = new int[40];
 
     int command = 0;
     int needParams = 0;
@@ -245,43 +251,52 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
 
     public void analogWrite(int pin, int value) {
 
-        inBytes.setBytes(new byte[]{
-            (byte) (Constanten.ANALOG_MESSAGE | (pin & 0x0F)),
-            (byte) (value & 0x7F),
-            (byte) (value >> 7)});
+        // Only Send Pin when Changed!
+        if (oldAnalogPin[pin] != value) {
+            oldAnalogPin[pin] = value;
 
-        if (driver != null) {
-            driver.sendCommand(comport.getItem(comport.selectedIndex) + ";SENDBYTES", inBytes);
+            inBytes.setBytes(new byte[]{
+                (byte) (Constanten.ANALOG_MESSAGE | (pin & 0x0F)),
+                (byte) (value & 0x7F),
+                (byte) (value >> 7)});
+
+            if (driver != null) {
+                driver.sendCommand(comport.getItem(comport.selectedIndex) + ";SENDBYTES", inBytes);
+            }
         }
-
     }
 
     public void digitalWrite(int pin, int value) {
-        int portNumber = (pin >> 3) & 0x0F;
 
-        int pinNo = pin - (portNumber * 8);
+        // Only Send Pin when Changed!
+        if (oldDigitalPin[pin] != value) {
+            oldDigitalPin[pin] = value;
 
-        //System.out.println("PinNo : "+pinNo);
-        if (value == 1) {
-            digitalOutputPort[portNumber] = digitalOutputPort[portNumber] | (1 << (pinNo));
-        } else {
-            digitalOutputPort[portNumber] = digitalOutputPort[portNumber] & ~(1 << (pinNo));
+            int portNumber = (pin >> 3) & 0x0F;
+
+            int pinNo = pin - (portNumber * 8);
+
+            //System.out.println("PinNo : "+pinNo);
+            if (value == 1) {
+                digitalOutputPort[portNumber] = digitalOutputPort[portNumber] | (1 << (pinNo));
+            } else {
+                digitalOutputPort[portNumber] = digitalOutputPort[portNumber] & ~(1 << (pinNo));
+            }
+
+            if (debug) {
+                System.out.println("Port = " + (Constanten.DIGITAL_MESSAGE | portNumber));
+                System.out.println("byte 1 = " + (digitalOutputPort[portNumber] & 0x7F));
+                System.out.println("byte 2 = " + (digitalOutputPort[portNumber] >> 7));
+            }
+
+            inBytes.setBytes(new byte[]{
+                (byte) (Constanten.DIGITAL_MESSAGE | portNumber),
+                (byte) (digitalOutputPort[portNumber] & 0x7F),
+                (byte) (digitalOutputPort[portNumber] >> 7),});
+            if (driver != null) {
+                driver.sendCommand(comport.getItem(comport.selectedIndex) + ";SENDBYTES", inBytes);
+            }
         }
-
-        if (debug) {
-            System.out.println("Port = " + (Constanten.DIGITAL_MESSAGE | portNumber));
-            System.out.println("byte 1 = " + (digitalOutputPort[portNumber] & 0x7F));
-            System.out.println("byte 2 = " + (digitalOutputPort[portNumber] >> 7));
-        }
-
-        inBytes.setBytes(new byte[]{
-            (byte) (Constanten.DIGITAL_MESSAGE | portNumber),
-            (byte) (digitalOutputPort[portNumber] & 0x7F),
-            (byte) (digitalOutputPort[portNumber] >> 7),});
-        if (driver != null) {
-            driver.sendCommand(comport.getItem(comport.selectedIndex) + ";SENDBYTES", inBytes);
-        }
-
     }
 
     /* capabilities query
@@ -444,8 +459,12 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
     }
 
     public Firmata() {
-        for (int i = 0; i < 10; i++) {
-            comport.addItem("COM" + i);
+        for (int i = 0; i < oldDigitalPin.length; i++) {
+            oldDigitalPin[i] = -999;
+        }
+
+        for (int i = 0; i < oldAnalogPin.length; i++) {
+            oldAnalogPin[i] = -999;
         }
 
         baud.addItem("300");
@@ -531,10 +550,11 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
     }
 
     public void setPropertyEditor() {
-
+        
+        element.jAddPEItem("Output refresh interval", delay_processing_outputs, 10, 10000);
+                
         //element.jAddPEItem("Poll Time[ms]", pollTime, 1, 5000);
-        element.jAddPEItem("Capatibilities", capatibilities_button, 0, 0);
-
+        //element.jAddPEItem("Capatibilities", capatibilities_button, 0, 0);
         element.jAddPEItem("COM Port", comport, 0, 0);
 
         element.jAddPEItem("Baud", baud, 1, 999999);
@@ -545,118 +565,269 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
         element.jAddPEItem("Config Pins", text, 0, 0);
     }
 
+    private String getCapatibilities() {
+
+        String str = "";
+
+        ArrayList<Object> args = new ArrayList<>();
+        args.add(comport.getItem(comport.selectedIndex));
+        args.add(new Integer(baud.getItem(baud.selectedIndex)));
+        args.add(new Integer(bits.getItem(bits.selectedIndex)));
+        args.add(new Integer(stopBits.getItem(stopBits.selectedIndex)));
+        args.add(new Integer(parity.getItem(parity.selectedIndex)));
+        args.add(true);
+
+        driver = element.jOpenDriver("MyOpenLab.RS232", args);
+        driver.registerOwner(this);
+
+        try {
+
+            Thread.sleep(6000);
+            queryCapatibilities();
+            Thread.sleep(1000);
+
+            String strCom = comport.getItem(comport.selectedIndex);
+            driver.sendCommand(strCom + ";CLOSE", null);
+            element.jCloseDriver("MyOpenLab.RS232");
+
+            str += "Firmata Protocol Version: " + version_1 + "." + version_2 + " (" + version_str + ")\n";
+
+            for (int i = 0; i < capatibilities.size() - 1; i++) {
+
+                PinCapatibilities items = capatibilities.get(i);
+                str += "" + i + "=";
+                if (items.items.isEmpty()) {
+                    str += "NOT SUPPORTED\n";
+                } else {
+                    for (PinCapatibilityItem item : items.items) {
+                        String type;
+
+                        switch (item.pinCapatibility) {
+                            case Constanten.PIN_INPUT:
+                                type = "DIGITAL_INPUT";
+                                break;
+                            case Constanten.PIN_OUTPUT:
+                                type = "DIGITAL_OUTPUT";
+                                break;
+                            case Constanten.PIN_ANALOG:
+                                type = "ANALOG_INPUT";
+                                break;
+                            case Constanten.PIN_PWM:
+                                type = "PWM_OUTPUT";
+                                break;
+                            case Constanten.PIN_SERVO:
+                                type = "SERVO_OUTPUT";
+                                break;
+                            default:
+                                type = "UNKNOWN";
+                                break;
+                        }
+
+                        str += "" + type + ";";
+                    }
+                    str += "\n";
+                }
+            }
+            if (debug) {
+                System.out.println(str);
+            }
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Firmata.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return str;
+    }
+
     public void propertyChanged(Object o) {
+        /*if (o.equals(text)) {
+         NewJDialog frm = new NewJDialog(null, true);
+         frm.jEditorPane1.setText(textVar.getValue());
+         frm.setTitle("Config-Pins");
+         frm.setVisible(true);
+
+         if (frm.result) {
+         textVar.setValue(frm.text);
+
+         init();
+         }
+         //loadImage(file.getValue());
+         }*/
+
         if (o.equals(text)) {
-            NewJDialog frm = new NewJDialog(null, true);
-            frm.jEditorPane1.setText(textVar.getValue());
-            frm.setTitle("Config-Pins");
-            frm.setVisible(true);
 
-            if (frm.result) {
-                textVar.setValue(frm.text);
+            if (comport.getSize() == 0) {
+                showMessage("Kein Com Port");
+                return;
+            }
 
+            if (comport.getItem(comport.selectedIndex).trim().length() == 0) {
+                showMessage("No Port Selected");
+                return;
+            }
+
+            final FormWait formwait = new FormWait();
+
+            formwait.setVisible(true);
+            formwait.repaint();
+
+            String xcapatibilities = getCapatibilities();
+            String xsettings = textVar.getValue();
+            DialogPins dialogPins = new DialogPins(null, true);
+            dialogPins.init(xcapatibilities, xsettings);
+
+            formwait.dispose();
+            dialogPins.setVisible(true);
+
+            if (dialogPins.result.length() > 0) {
+
+                textVar.setValue(dialogPins.result);
                 init();
             }
-            //loadImage(file.getValue());
         }
 
-        if (o.equals(capatibilities_button)) {
+        /*if (o.equals(capatibilities_button)) {
 
-            if (comport.getItem(comport.selectedIndex).length() > 0) {
-                ArrayList<Object> args = new ArrayList<>();
-                args.add(comport.getItem(comport.selectedIndex));
-                args.add(new Integer(baud.getItem(baud.selectedIndex)));
-                args.add(new Integer(bits.getItem(bits.selectedIndex)));
-                args.add(new Integer(stopBits.getItem(stopBits.selectedIndex)));
-                args.add(new Integer(parity.getItem(parity.selectedIndex)));
-                args.add(true);
+         ArrayList<Object> args = new ArrayList<>();
+         args.add(comport.getItem(comport.selectedIndex));
+         args.add(new Integer(baud.getItem(baud.selectedIndex)));
+         args.add(new Integer(bits.getItem(bits.selectedIndex)));
+         args.add(new Integer(stopBits.getItem(stopBits.selectedIndex)));
+         args.add(new Integer(parity.getItem(parity.selectedIndex)));
+         args.add(true);
 
-                driver = element.jOpenDriver("MyOpenLab.RS232", args);
-                driver.registerOwner(this);
+         driver = element.jOpenDriver("MyOpenLab.RS232", args);
+         driver.registerOwner(this);
 
-                try {
+         try {
 
-                    Thread.sleep(6000);
-                    queryCapatibilities();
-                    Thread.sleep(1000);
+         Thread.sleep(6000);
+         queryCapatibilities();
+         Thread.sleep(1000);
 
-                    String strCom = comport.getItem(comport.selectedIndex);
-                    driver.sendCommand(strCom + ";CLOSE", null);
-                    element.jCloseDriver("MyOpenLab.RS232");
+         String strCom = comport.getItem(comport.selectedIndex);
+         driver.sendCommand(strCom + ";CLOSE", null);
+         element.jCloseDriver("MyOpenLab.RS232");
 
-                    String str = "";
+         String str = "";
 
-                    str += "Firmata Protocol Version: " + version_1 + "." + version_2 + " (" + version_str + ")\n";
+         str += "Firmata Protocol Version: " + version_1 + "." + version_2 + " (" + version_str + ")\n";
 
-                    for (int i = 0; i < capatibilities.size() - 1; i++) {
+         for (int i = 0; i < capatibilities.size() - 1; i++) {
 
-                        PinCapatibilities items = capatibilities.get(i);
-                        str += "" + i + "=";
-                        if (items.items.isEmpty()) {
-                            str += "NOT SUPPORTED\n";
-                        } else {
-                            for (PinCapatibilityItem item : items.items) {
-                                String type;
+         PinCapatibilities items = capatibilities.get(i);
+         str += "" + i + "=";
+         if (items.items.isEmpty()) {
+         str += "NOT SUPPORTED\n";
+         } else {
+         for (PinCapatibilityItem item : items.items) {
+         String type;
 
-                                switch (item.pinCapatibility) {
-                                    case Constanten.PIN_INPUT:
-                                        type = "DIGITAL_INPUT";
-                                        break;
-                                    case Constanten.PIN_OUTPUT:
-                                        type = "DIGITAL_OUTPUT";
-                                        break;
-                                    case Constanten.PIN_ANALOG:
-                                        type = "ANALOG_INPUT";
-                                        break;
-                                    case Constanten.PIN_PWM:
-                                        type = "PWM_OUTPUT";
-                                        break;
-                                    case Constanten.PIN_SERVO:
-                                        type = "SERVO_OUTPUT";
-                                        break;
-                                    default:
-                                        type = "UNKNOWN";
-                                        break;
-                                }
+         switch (item.pinCapatibility) {
+         case Constanten.PIN_INPUT:
+         type = "DIGITAL_INPUT";
+         break;
+         case Constanten.PIN_OUTPUT:
+         type = "DIGITAL_OUTPUT";
+         break;
+         case Constanten.PIN_ANALOG:
+         type = "ANALOG_INPUT";
+         break;
+         case Constanten.PIN_PWM:
+         type = "PWM_OUTPUT";
+         break;
+         case Constanten.PIN_SERVO:
+         type = "SERVO_OUTPUT";
+         break;
+         default:
+         type = "UNKNOWN";
+         break;
+         }
 
-                                str += "" + type + ";";
-                            }
-                            str += "\n";
-                        }
-                    }
-                    if (debug) {
-                        System.out.println(str);
-                    }
+         str += "" + type + ";";
+         }
+         str += "\n";
+         }
+         }
+         if (debug) {
+         System.out.println(str);
+         }
 
-                    NewJDialog frm = new NewJDialog(null, true);
-                    frm.setTitle("Capatibilities");
-                    frm.jEditorPane1.setText(str);
-                    frm.setVisible(true);
+         NewJDialog frm = new NewJDialog(null, true);
+         frm.setTitle("Capatibilities");
+         frm.jEditorPane1.setText(str);
+         frm.setVisible(true);
 
-                    if (frm.result) {
-                    }
+         if (frm.result) {
+         }
 
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Firmata.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InterruptedException ex) {
+         Logger.getLogger(Firmata.class.getName()).log(Level.SEVERE, null, ex);
 
-                }
-            } else {
-                showMessage("No Com Port Selected!");
-            }
-        }
-
+         }
+         }*/
     }
 
     public void init() {
 
+        ArrayList<Object> args = new ArrayList<>();
+        args.add("NULL");
+        args.add(0);
+        args.add(0);
+        args.add(0);
+        args.add(0);
+        args.add(false);
+
+        driver = element.jOpenDriver("MyOpenLab.RS232", args);
+
+        comport.addItem("");
+
+        if (driver != null) {
+
+            ArrayList<String> ports = new ArrayList();
+            driver.sendCommand("NULL;GETPORTS", ports);
+
+            System.out.println("size of Ports : " + ports.size());
+            for (String port : ports) {
+                System.out.println("-X-------> Port : " + port);
+                comport.addItem(port);
+            }
+
+            driver.sendCommand("NULL;CLOSE", null);
+            element.jCloseDriver("MyOpenLab.RS232");
+
+        } else {
+            System.out.println("DRIVER IS NULL!!!");
+        }
+
         inputPins = 0;
         outputPins = 0;
 
+        // Allow only Active Pins
         String str = textVar.getValue().trim();
+        
         str = str.replaceAll("\n", "");
         lines = str.split(";");
 
+        ArrayList<String> tempLines = new ArrayList();
         for (String line : lines) {
+            if (line.trim().length() > 1) {
+                if (line.substring(0, 1).equals("a")) {
+                    tempLines.add(line.substring(1));
+                }
+            }
+        }
+
+        allowedLines = new String[tempLines.size()];
+        
+        int counterc = 0;
+        for (String line : tempLines) {
+            allowedLines[counterc++] = line.trim();
+            System.out.println("line X "+line);
+        }
+
+        for (String line : allowedLines) {
 
             if (line.length() > 0) {
 
@@ -685,7 +856,7 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
 
         int c = 0;
 
-        for (String line : lines) {
+        for (String line : allowedLines) {
             String cols[] = line.split("=");
 
             if (cols.length == 2) {
@@ -706,7 +877,7 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
 
             }
         }
-        for (String line : lines) {
+        for (String line : allowedLines) {
             String cols[] = line.split("=");
 
             if (cols.length == 2) {
@@ -752,7 +923,7 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
         inPinType = new String[inputPins];
 
         //lines = textVar.getValue().split(";");
-        for (String line : lines) {
+        for (String line : allowedLines) {
             String cols[] = line.split("=");
 
             if (cols.length == 2) {
@@ -806,7 +977,7 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
         outPinType = new String[outputPins];
 
         //lines = textVar.getValue().split(";");
-        for (String line : lines) {
+        for (String line : allowedLines) {
             if (line.length() > 0) {
                 String cols[] = line.trim().split("=");
 
@@ -847,75 +1018,68 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
 
     public void start() {
 
-        if (comport.getItem(comport.selectedIndex).length() > 0) {
-            try {
-                ArrayList<Object> args = new ArrayList<>();
+        try {
+            ArrayList<Object> args = new ArrayList<>();
 
-                //args.add(new String("COM" + comPort.getValue()));
-                args.add(comport.getItem(comport.selectedIndex));
-                args.add(new Integer(baud.getItem(baud.selectedIndex)));
-                args.add(new Integer(bits.getItem(bits.selectedIndex)));
-                args.add(new Integer(stopBits.getItem(stopBits.selectedIndex)));
-                args.add(new Integer(parity.getItem(parity.selectedIndex)));
+            args.add(comport.getItem(comport.selectedIndex));
+            args.add(new Integer(baud.getItem(baud.selectedIndex)));
+            args.add(new Integer(bits.getItem(bits.selectedIndex)));
+            args.add(new Integer(stopBits.getItem(stopBits.selectedIndex)));
+            args.add(new Integer(parity.getItem(parity.selectedIndex)));
+            args.add(true); // No Parity
 
-                args.add(true); // No Parity
+            driver = element.jOpenDriver("MyOpenLab.RS232", args);
+            driver.registerOwner(this);
+            started = true;
 
-                driver = element.jOpenDriver("MyOpenLab.RS232", args);
-                driver.registerOwner(this);
-                started = true;
+            Thread.sleep(5000);
 
-                Thread.sleep(5000);
+            //init();
+            initAllPins();
 
-                //init();
-                initAllPins();
+            Thread.sleep(100);
 
-                Thread.sleep(100);
+            for (String line : allowedLines) {
+                String cols[] = line.split("=");
 
-                for (String line : lines) {
-                    String cols[] = line.split("=");
+                if (cols.length == 2) {
+                    int pinNum = Integer.parseInt(cols[0].trim().replace("\n", ""));
+                    String pinType = cols[1].trim().replace("\n", "");
 
-                    if (cols.length == 2) {
-                        int pinNum = Integer.parseInt(cols[0].trim().replace("\n", ""));
-                        String pinType = cols[1].trim().replace("\n", "");
+                    if (pinType.trim().startsWith("DIGITAL_OUTPUT")) {
+                        pinMode(pinNum, Constanten.PIN_OUTPUT);
+                    }
+                    if (pinType.trim().startsWith("PWM_OUTPUT")) {
+                        pinMode(pinNum, Constanten.PIN_PWM);
+                    }
+                    if (pinType.trim().startsWith("SERVO_OUTPUT")) {
 
-                        if (pinType.trim().startsWith("DIGITAL_OUTPUT")) {
-                            pinMode(pinNum, Constanten.PIN_OUTPUT);
+                        //System.out.println("XXX : "+pinType.substring("SERVO_OUTPUT".length()+1, pinType.length()-1));
+                        String splitted[] = pinType.substring("SERVO_OUTPUT".length() + 1, pinType.length() - 1).split(",");
+
+                        if (splitted.length == 2) {
+                            setServoConfig(pinNum, Integer.parseInt(splitted[0].trim()), Integer.parseInt(splitted[1].trim()));
                         }
-                        if (pinType.trim().startsWith("PWM_OUTPUT")) {
-                            pinMode(pinNum, Constanten.PIN_PWM);
-                        }
-                        if (pinType.trim().startsWith("SERVO_OUTPUT")) {
-
-                            //System.out.println("XXX : "+pinType.substring("SERVO_OUTPUT".length()+1, pinType.length()-1));
-                            String splitted[] = pinType.substring("SERVO_OUTPUT".length() + 1, pinType.length() - 1).split(",");
-
-                            if (splitted.length == 2) {
-                                setServoConfig(pinNum, Integer.parseInt(splitted[0].trim()),Integer.parseInt(splitted[1].trim()));
-                            }
-                            pinMode(pinNum, Constanten.PIN_SERVO);
-                        }
-                        if (pinType.trim().startsWith("DIGITAL_INPUT")) {
-                            pinMode(pinNum, Constanten.PIN_INPUT);
-                            //reportPin(pinNum);
-                        }
-                        if (pinType.trim().startsWith("ANALOG_INPUT")) {
-                            pinMode(pinNum, Constanten.PIN_ANALOG);
-                            //reportAnalogPin(pinNum);
-                        }
+                        pinMode(pinNum, Constanten.PIN_SERVO);
+                    }
+                    if (pinType.trim().startsWith("DIGITAL_INPUT")) {
+                        pinMode(pinNum, Constanten.PIN_INPUT);
+                        //reportPin(pinNum);
+                    }
+                    if (pinType.trim().startsWith("ANALOG_INPUT")) {
+                        pinMode(pinNum, Constanten.PIN_ANALOG);
+                        //reportAnalogPin(pinNum);
                     }
                 }
-
-                timer = new MyTimer();
-                timer.owner = this;
-                timer.start();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Firmata.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
-            showMessage("COM Port needed!");
+            timer = new MyTimer();
+            timer.delay=delay_processing_outputs.getValue();
+            timer.owner = this;
+            timer.start();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Firmata.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public static void showMessage(String message) {
@@ -1176,9 +1340,16 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
     @Override
     public void process() {
 
-        if (debug) {
-            System.out.println("in.length=" + in.length);
+        long millis = System.currentTimeMillis();
+
+        long diff = Math.abs(oldMillis - millis);
+        // System.out.println("diff" + diff);
+
+        if (diff < 100) {
+            return;
         }
+        //System.out.println("Processing " + Math.random());
+        oldMillis = millis;
 
         for (int i = 0; i < in.length; i++) {
 
@@ -1191,62 +1362,75 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
                     boolean inputPin = value.getValue();
 
                     if (inputPin == true) {
-                        if (debug) {
-                            System.out.println("digitalWrite(" + pinNumber + ", " + 0 + ");");
-                        }
                         digitalWrite(pinNumber, 1);
                     } else {
-                        if (debug) {
-                            System.out.println("digitalWrite(" + pinNumber + ", " + 1 + ");");
-                        }
                         digitalWrite(pinNumber, 0);
                     }
                 }
             }
 
-            if (pinType.startsWith("PWM_OUTPUT")) {
+            if (pinType.startsWith("SERVO_OUTPUT") || pinType.startsWith("PWM_OUTPUT")) {
                 if (in[i] instanceof VSInteger) {
                     VSInteger value = (VSInteger) in[i];
                     int inputPin = value.getValue();
 
-                    if (debug) {
-                        System.out.println("PWM analogWrite(" + pinNumber + ", " + inputPin + ");");
-                    }
                     analogWrite(pinNumber, inputPin);
-
                 }
             }
-
-            if (pinType.startsWith("SERVO_OUTPUT")) {
-                if (in[i] instanceof VSInteger) {
-                    VSInteger value = (VSInteger) in[i];
-                    int inputPin = value.getValue();
-
-                    if (debug) {
-                        System.out.println("SERVO analogWrite(" + pinNumber + ", " + inputPin + ");");
-                    }
-                    analogWrite(pinNumber, inputPin);
-
-                }
-            }
-
         }
+    }
+
+    public void getPorts(String[] ports) {
 
     }
 
     @Override
     public void loadFromStream(java.io.FileInputStream fis) {
+
+        /*ArrayList<Object> args = new ArrayList<>();
+         args.add("NULL");
+         args.add(0);
+         args.add(0);
+         args.add(0);
+         args.add(0);
+         args.add(false);
+
+         driver = element.jOpenDriver("MyOpenLab.RS232", args);
+
+         comport.addItem("CCC");
+
+         if (driver != null) {
+
+         ArrayList<String> ports = new ArrayList();
+         driver.sendCommand("NULL;GETPORTS", ports);
+
+         System.out.println("size of Ports : "+ports.size());
+         for (String port : ports) {
+         System.out.println("-X-------> Port : " + port);
+         comport.addItem(port);
+         }
+
+         driver.sendCommand("NULL;CLOSE", null);
+         element.jCloseDriver("MyOpenLab.RS232");
+
+         } else {
+         System.out.println("DRIVER IS NULL!!!");
+         }*/
+
+        /*for (String list1 : (String[]) args.get(0)) {
+         System.out.println("XXXPORT : " + list1);
+         comport.addItem(list1);
+         }*/
         textVar.loadFromStream(fis);
         comport.loadFromStream(fis);
         baud.loadFromStream(fis);
         bits.loadFromStream(fis);
         parity.loadFromStream(fis);
         stopBits.loadFromStream(fis);
+        delay_processing_outputs.loadFromStream(fis);
 
         init();
 
-        // propertyChanged(showGraphs);
-        //processOutCharts();
     }
 
     @Override
@@ -1258,5 +1442,6 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
         bits.saveToStream(fos);
         parity.saveToStream(fos);
         stopBits.saveToStream(fos);
+        delay_processing_outputs.saveToStream(fos);
     }
 }

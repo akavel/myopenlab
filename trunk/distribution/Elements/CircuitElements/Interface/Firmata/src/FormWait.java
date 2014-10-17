@@ -28,7 +28,7 @@ public class FormWait extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Please Wait");
         setAlwaysOnTop(true);
         setResizable(false);
@@ -49,10 +49,10 @@ public class FormWait extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jLabel1)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(289, 171));
+        setSize(new java.awt.Dimension(289, 70));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

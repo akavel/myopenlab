@@ -18,7 +18,6 @@
 //* along with this library; if not, write to the Free Software Foundation,   *
 //* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110, USA                  *
 //*****************************************************************************
-
 import VisualLogic.*;
 import VisualLogic.variables.*;
 import tools.*;
@@ -38,6 +37,10 @@ public class RS232 implements MyOpenLabDriverIF {
 
     private MyOpenLabDriverOwnerIF owner;
 
+    public RS232() {
+        System.out.println("*************** PORTS ---------------- ");
+    }
+
     public Driver getDriver(String port) {
         for (int i = 0; i < liste.size(); i++) {
             Driver driver = liste.get(i);
@@ -50,6 +53,7 @@ public class RS232 implements MyOpenLabDriverIF {
     }
 
     public void sendCommand(String commando, Object value) {
+
         String[] strings = commando.split(";");
 
         //System.out.println("COMMAND : "+commando);
@@ -61,6 +65,19 @@ public class RS232 implements MyOpenLabDriverIF {
             //System.out.println("cmd : "+strings[1]);
         }
 
+        if (commando.equals("GETPORTS")) {
+            
+            Driver driver = getDriver(strPort);
+            
+            System.out.println("--------> GETPORTS");
+            String[] list = driver.listSerialPorts();
+            
+            //ArrayList<String>
+            for (int i = 0; i < list.length; i++) {                
+                ((ArrayList<String>)value).add(list[i]);
+            }
+                        
+        }
         if (commando.equals("TIMEOUT")) {
             if (value instanceof VSInteger) {
                 VSInteger tmp = (VSInteger) value;
@@ -132,12 +149,13 @@ public class RS232 implements MyOpenLabDriverIF {
         Driver driver = getDriver(lastPort);
         driver.owner = owner;
         //this.owner=owner;
+
     }
 
     public void driverStart(ArrayList args) {
         
 
-        if (args instanceof ArrayList && args.size()>= 5) {
+        if (args instanceof ArrayList && args.size() >= 5) {
 
             String strCOM = (String) args.get(0);
             int intBaud = (Integer) args.get(1);
@@ -196,7 +214,7 @@ public class RS232 implements MyOpenLabDriverIF {
 
             if (getDriver(strCOM) == null) {
                 Driver driver = new Driver(strCOM, intBaud, intBits, intStopBits, intParity);
-                driver.useOwnInHandler=useOwnInHandler;
+                driver.useOwnInHandler = useOwnInHandler;
                 driver.start();
 
                 liste.add(driver);
