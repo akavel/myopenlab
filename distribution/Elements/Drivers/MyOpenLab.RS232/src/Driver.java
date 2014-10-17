@@ -18,7 +18,6 @@
 //* along with this library; if not, write to the Free Software Foundation,   *
 //* Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110, USA                  *
 //*****************************************************************************
-
 import VisualLogic.*;
 import VisualLogic.variables.*;
 import tools.*;
@@ -43,38 +42,59 @@ public class Driver {
     public MyOpenLabDriverOwnerIF owner;
 
     private VS1DByte outBytes = new VS1DByte(0);
-    
+
     private SerialReader serialThread;
 
     public boolean useOwnInHandler = false;
 
     public String port;
 
+    public String[] listSerialPorts() {
+
+        Enumeration ports = CommPortIdentifier.getPortIdentifiers();
+        ArrayList portList = new ArrayList();
+        String portArray[] = null;
+        while (ports.hasMoreElements()) {
+            CommPortIdentifier port = (CommPortIdentifier) ports.nextElement();
+            if (port.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+                portList.add(port.getName());
+            }
+        }
+        portArray = (String[]) portList.toArray(new String[0]);
+        return portArray;
+    }
+
     public Driver(String port, int baud, int bits, int stopBits, int parity) {
+
         this.port = port;
 
-        System.out.println("PORT :" + port);
+        if (port.trim().equalsIgnoreCase("NULL")) {
 
-        try {
-            portID = CommPortIdentifier.getPortIdentifier(port);
-            serss = (SerialPort) portID.open("MYOPENLAB", 2000);
-        } catch (Exception exc) {
-            System.out.println("Fehler :" + exc);
+            System.out.println("NULL OK");
+        } else {
+
+            System.out.println("PORT :" + port);
+
+            try {
+                portID = CommPortIdentifier.getPortIdentifier(port);
+                serss = (SerialPort) portID.open("MYOPENLAB", 2000);
+            } catch (Exception exc) {
+                System.out.println("Fehler :" + exc);
+            }
+
+            try {
+                serss.setSerialPortParams(baud, bits, stopBits, parity);
+                //serss.setRTS(true);
+                //serss.setDTR(true);
+
+            } catch (Exception e) {
+            }
+
+            try {
+                dos = new DataOutputStream(serss.getOutputStream());
+            } catch (Exception e2) {
+            }
         }
-
-        try {
-            serss.setSerialPortParams(baud, bits, stopBits, parity);
-            //serss.setRTS(true);
-            //serss.setDTR(true);
-
-        } catch (Exception e) {
-        }
-
-        try {
-            dos = new DataOutputStream(serss.getOutputStream());
-        } catch (Exception e2) {
-        }
-
     }
 
     public void start() {
@@ -103,13 +123,12 @@ public class Driver {
     }
 
     public void close() {
-        
-          
-        if (serialThread!=null){
-            serialThread.stop=true;
+
+        if (serialThread != null) {
+            serialThread.stop = true;
             System.out.println("Closing Driver");
         }
-        
+
         if (dos != null) {
             try {
                 dos.close();
@@ -125,32 +144,17 @@ public class Driver {
         if (serss != null) {
             serss.close();
         }
-      
-        
-    }
 
-    public String[] listSerialPorts() {
-
-        Enumeration ports = CommPortIdentifier.getPortIdentifiers();
-        ArrayList portList = new ArrayList();
-        String portArray[] = null;
-        while (ports.hasMoreElements()) {
-            CommPortIdentifier port = (CommPortIdentifier) ports.nextElement();
-            if (port.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-                portList.add(port.getName());
-            }
-        }
-        portArray = (String[]) portList.toArray(new String[0]);
-        return portArray;
     }
 
     public void sendCommand(String commando, Object value) {
+
+        System.out.println("RS232 COMMAND : " + commando);
+
         if (value instanceof VS1DByte) {
             VS1DByte values = (VS1DByte) value;
-            System.out.println("RS232 COMMAND : " + commando);
 
-            int len = values.getLength();
-
+            //int len = values.getLength();
             byte[] dest = values.getValues();
 
             /*if (commando.equals("RTSON")) serss.setRTS(true);
@@ -163,6 +167,8 @@ public class Driver {
 
         }
     }
+
+    
 
     public void registerOwner(MyOpenLabDriverOwnerIF owner) {
         this.owner = owner;
@@ -273,20 +279,24 @@ public class Driver {
     public class SerialReader extends Thread {
 
         private InputStream in;
-        public boolean stop=false;
+        public boolean stop = false;
 
         @Override
         public void run() {
-            stop=false;
+            stop = false;
             try {
                 while (true) {
 
-                    if (stop) return;
+                    if (stop) {
+                        return;
+                    }
                     while (this.in.available() > 0) {
                         int cc = in.read();
                         owner.getSingleByte(cc);
-                        
-                        if (stop) return;
+
+                        if (stop) {
+                            return;
+                        }
                     }
                 }
             } catch (IOException ex) {
