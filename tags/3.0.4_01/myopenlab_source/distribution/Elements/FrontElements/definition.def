@@ -1,0 +1,5 @@
+ISDIRECTORY = true
+CAPTION= Front
+CAPTION_EN= Front
+CAPTION_ES=Frontal
+ICONFILENAME = icon32.png

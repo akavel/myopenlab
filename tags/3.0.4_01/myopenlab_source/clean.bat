@@ -1,0 +1,2 @@
+del *.vlogic
+del *.log
