@@ -144,6 +144,8 @@ public class FrameInfo extends javax.swing.JDialog {
             
             URL url = null;
             
+            System.out.println(strLocale);
+            
             if (strLocale.equalsIgnoreCase("de_DE"))
             {
                 url = getClass().getResource("/VisualLogic/license.txt");
@@ -283,23 +285,31 @@ public class FrameInfo extends javax.swing.JDialog {
         jToggleButton3 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("src/VisualLogic/FrameInfo"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("VisualLogic/FrameInfo"); // NOI18N
         setTitle(bundle.getString("Titel")); // NOI18N
         setBackground(java.awt.SystemColor.control);
+        setName("Form"); // NOI18N
         setResizable(false);
 
         jButton1.setText(bundle.getString("close")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setAlignmentX(0.0F);
+        jTabbedPane1.setName("jTabbedPane1"); // NOI18N
 
-        jEditorPane1.setBorder(null);
+        jPanel5.setName("jPanel5"); // NOI18N
+
+        jScrollPane1.setAlignmentX(0.0F);
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
         jEditorPane1.setEditable(false);
+        jEditorPane1.setBorder(null);
         jEditorPane1.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
+        jEditorPane1.setName("jEditorPane1"); // NOI18N
         jEditorPane1.setPreferredSize(new java.awt.Dimension(100, 100));
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -309,7 +319,7 @@ public class FrameInfo extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -322,8 +332,13 @@ public class FrameInfo extends javax.swing.JDialog {
 
         jTabbedPane1.addTab(bundle.getString("Lizenz"), jPanel5); // NOI18N
 
+        jPanel7.setName("jPanel7"); // NOI18N
+
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
+
         jEditorPane2.setEditable(false);
-        jEditorPane2.setText("MyOpenLab project initiator: Carmelo Salafia (cswi@gmx.de)\nhttp://www.myopenlab.de\nIf you modify the myopenlab sourcecode, please send it to cswi@gmx.de\nso i can publish it under myopenlab.de.\n\nIf some Elements don't possess sourcecode you can request it by email.\n\nSome Icons from:\n+ Tango Project : http://tango.freedesktop.org\n+ mini icons - famfamfam.com\n\nRXTX Library LGPL License \nfrom http://users.frii.com/jarvi/rxtx/");
+        jEditorPane2.setText(bundle.getString("FrameInfo.jEditorPane2.text")); // NOI18N
+        jEditorPane2.setName("jEditorPane2"); // NOI18N
         jScrollPane2.setViewportView(jEditorPane2);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -345,8 +360,13 @@ public class FrameInfo extends javax.swing.JDialog {
 
         jTabbedPane1.addTab(bundle.getString("Copyrights"), jPanel7); // NOI18N
 
+        jPanel2.setName("jPanel2"); // NOI18N
+
+        jScrollPane4.setName("jScrollPane4"); // NOI18N
+
         jTextPane2.setEditable(false);
         jTextPane2.setText(bundle.getString("contributor")); // NOI18N
+        jTextPane2.setName("jTextPane2"); // NOI18N
         jScrollPane4.setViewportView(jTextPane2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -355,7 +375,7 @@ public class FrameInfo extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -369,7 +389,10 @@ public class FrameInfo extends javax.swing.JDialog {
         jTabbedPane1.addTab(bundle.getString("contributors"), jPanel2); // NOI18N
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel6.setName("jPanel6"); // NOI18N
         jPanel6.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane3.setName("jScrollPane3"); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -382,11 +405,16 @@ public class FrameInfo extends javax.swing.JDialog {
                 "Name", "Value"
             }
         ));
+        jTable1.setName("jTable1"); // NOI18N
         jScrollPane3.setViewportView(jTable1);
 
         jPanel6.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab(bundle.getString("Java_Details"), jPanel6); // NOI18N
+
+        jPanel1.setName("jPanel1"); // NOI18N
+
+        jScrollPane5.setName("jScrollPane5"); // NOI18N
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -415,6 +443,7 @@ public class FrameInfo extends javax.swing.JDialog {
             }
         });
         jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable2.setName("jTable2"); // NOI18N
         jScrollPane5.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -423,7 +452,7 @@ public class FrameInfo extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -434,26 +463,30 @@ public class FrameInfo extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Drivers", jPanel1);
+        jTabbedPane1.addTab(bundle.getString("FrameInfo.jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
 
-        jLabel6.setText("Build :");
+        jLabel6.setText(bundle.getString("FrameInfo.jLabel6.text")); // NOI18N
         jLabel6.setAutoscrolls(true);
+        jLabel6.setName("jLabel6"); // NOI18N
 
         jLabelVers.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabelVers.setText("XX.XX");
+        jLabelVers.setText(bundle.getString("FrameInfo.jLabelVers.text")); // NOI18N
+        jLabelVers.setName("jLabelVers"); // NOI18N
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/top.png"))); // NOI18N
         jButton2.setBorderPainted(false);
         jButton2.setDefaultCapable(false);
         jButton2.setFocusPainted(false);
         jButton2.setFocusable(false);
+        jButton2.setName("jButton2"); // NOI18N
         jButton2.setPreferredSize(new java.awt.Dimension(500, 79));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/icon_2.png"))); // NOI18N
-        jButton3.setToolTipText("www.MyOpenLab.de");
+        jButton3.setToolTipText(bundle.getString("FrameInfo.jButton3.toolTipText")); // NOI18N
         jButton3.setBorderPainted(false);
         jButton3.setFocusPainted(false);
         jButton3.setFocusable(false);
+        jButton3.setName("jButton3"); // NOI18N
         jButton3.setPreferredSize(new java.awt.Dimension(56, 41));
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -463,6 +496,7 @@ public class FrameInfo extends javax.swing.JDialog {
 
         jToggleButton1.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/lgplv3-88x31.png"))); // NOI18N
+        jToggleButton1.setName("jToggleButton1"); // NOI18N
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -471,6 +505,7 @@ public class FrameInfo extends javax.swing.JDialog {
 
         jToggleButton2.setBackground(new java.awt.Color(255, 255, 255));
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/gplv3-88x31.png"))); // NOI18N
+        jToggleButton2.setName("jToggleButton2"); // NOI18N
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
@@ -478,6 +513,7 @@ public class FrameInfo extends javax.swing.JDialog {
         });
 
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/netBeans.gif"))); // NOI18N
+        jToggleButton3.setName("jToggleButton3"); // NOI18N
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
@@ -495,7 +531,7 @@ public class FrameInfo extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -514,7 +550,7 @@ public class FrameInfo extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -536,7 +572,8 @@ public class FrameInfo extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(568, 473));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jButton3MouseClicked
