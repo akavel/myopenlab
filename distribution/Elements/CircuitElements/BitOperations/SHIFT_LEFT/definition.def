@@ -1,6 +1,0 @@
-ISDIRECTORY = FALSE
-CAPTION=     Shift Left-Operation
-CAPTION_EN = Shift Left-Operation
-CAPTION_ES = Shift Left-Operation
-ClassCircuit =ShiftLeft
-icon= bin/icon.gif

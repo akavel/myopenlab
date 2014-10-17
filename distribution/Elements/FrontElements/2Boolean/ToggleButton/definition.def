@@ -1,7 +1,0 @@
-ISDIRECTORY = FALSE
-CAPTION     = ToggleButton
-CAPTION_EN  = ToggleButton
-CAPTION_ES  = ToggleButton
-ClassCircuit = ToggleButton
-ClassFront = TasterPanel
-Icon= bin/Taster.GIF

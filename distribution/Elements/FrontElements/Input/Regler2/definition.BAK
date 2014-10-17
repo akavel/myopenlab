@@ -1,6 +1,0 @@
-isDirectory  = FALSE
-Caption      = Regler
-JAR          = bin/Regler.jar
-Classcircuit = Regler
-Classfront   = ReglerPanel
-icon         = bin/Regler.GIF

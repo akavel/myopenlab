@@ -1,6 +1,0 @@
-ISDIRECTORY = FALSE
-CAPTION= Schriftart Konstante
-CAPTION_EN= Font constant
-CAPTION_ES= Font Constante
-ClassCircuit = FontConst
-Icon= bin/icon.gif

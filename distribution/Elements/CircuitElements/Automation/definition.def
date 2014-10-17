@@ -1,9 +1,0 @@
-ISDIRECTORY     = TRUE
-CAPTION         = Automation
-CAPTION_EN      = Automation
-CAPTION_ES      = Automation
-VM              = 
-VM_DIR_EDITABLE = TRUE
-CLASSCIRCUIT    = 
-CLASSFRONT      = 
-ICON            = icon.png

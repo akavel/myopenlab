@@ -1,6 +1,0 @@
-ISDIRECTORY  = FALSE
-CAPTION      = Console Print-Line
-CAPTION_EN   = Console Print-Line
-CAPTION_ES   = Console Print-Line
-ClassCircuit = ConsolePrintln
-Icon         = bin/icon.gif

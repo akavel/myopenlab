@@ -1,6 +1,0 @@
-ISDIRECTORY = FALSE
-CAPTION     = Ticker Timer
-CAPTION_EN  = Ticker Timer
-CAPTION_ES  = Ticker Timer
-classCircuit= TickerTimer
-Icon        = bin/icon.gif

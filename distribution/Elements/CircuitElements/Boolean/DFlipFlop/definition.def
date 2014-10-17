@@ -1,6 +1,0 @@
-ISDIRECTORY  = FALSE
-CAPTION      = DFlipFlop
-CAPTION_EN   = DFlipFlop
-CAPTION_ES   = DFlipFlop
-ClassCircuit = DFlipFlop
-Icon         = bin/icon.gif

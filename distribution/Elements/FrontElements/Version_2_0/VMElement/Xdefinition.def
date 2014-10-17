@@ -1,7 +1,0 @@
-ISDIRECTORY  = FALSE
-CAPTION      = Embedded VM Element
-CAPTION_EN   = Embedded VM Component
-CAPTION_ES   = Embedded VM Component
-ClassCircuit = VMElement
-ClassFront   = VMPanel
-Icon         = bin/VMElement.gif

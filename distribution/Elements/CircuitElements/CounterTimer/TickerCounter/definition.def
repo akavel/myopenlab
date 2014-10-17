@@ -1,6 +1,0 @@
-ISDIRECTORY = FALSE
-CAPTION     = Ticker Counter
-CAPTION_EN  = Ticker Counter
-CAPTION_ES  = Ticker Counter
-classCircuit= TickerCounter
-Icon        = bin/icon.gif

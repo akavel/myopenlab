@@ -1,2 +1,0 @@
-del *.vlogic
-del *.log

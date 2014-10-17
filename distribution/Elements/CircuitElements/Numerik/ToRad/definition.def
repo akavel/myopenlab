@@ -1,9 +1,0 @@
-ISDIRECTORY     = FALSE
-CAPTION         = to Rad
-CAPTION_EN      = to Rad
-CAPTION_ES      = to Rad
-VM              = ToRad.vlogic
-VM_DIR_EDITABLE = false
-CLASSCIRCUIT    = 
-CLASSFRONT      = 
-ICON            = icon.png

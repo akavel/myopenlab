@@ -1,7 +1,0 @@
-ISDIRECTORY  = FALSE
-CAPTION	     = Canvas
-CAPTION_EN   = Canvas
-CAPTION_ES   = Canvas
-ClassCircuit = Canvas
-ClassFront   = Panel
-icon         = bin/Canvas.gif
