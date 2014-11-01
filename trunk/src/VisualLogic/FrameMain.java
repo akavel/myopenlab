@@ -9,11 +9,11 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
+You should have received a copy of the GNU Ge/Volumes/Volume/NetBeansProjects/myopenlab_source/src/VisualLogic/FrameMain.formneral Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package VisualLogic;
-
+ 
 import VisualLogic.*;
 import BasisStatus.StatusGummiBandX;
 import BasisStatus.StatusGummiBandXBackIF;
@@ -2331,7 +2331,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         });
         jPopupMenu1.add(jmiCopyToClip);
 
-        jmniCloseAllVMs.setText(bundle.getString("FrameMain.jmniCloseAllVMs.text")); // NOI18N
+        jmniCloseAllVMs.setText("null");
         jmniCloseAllVMs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmniCloseAllVMsActionPerformed(evt);
@@ -2350,19 +2350,19 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
         });
         addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
-                formComponentMoved(evt);
-            }
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
+            }
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                formComponentMoved(evt);
             }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -2384,10 +2384,11 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jToolBar6.setFloatable(false);
         jToolBar6.setRollover(true);
-        jToolBar6.setPreferredSize(new java.awt.Dimension(60, 35));
+        jToolBar6.setPreferredSize(new java.awt.Dimension(70, 35));
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/document-new.png"))); // NOI18N
         jButton10.setToolTipText(bundle.getString("NewProject")); // NOI18N
+        jButton10.setBorderPainted(false);
         jButton10.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2398,6 +2399,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/open24Project.gif"))); // NOI18N
         jButton3.setToolTipText(bundle.getString("openProject")); // NOI18N
+        jButton3.setBorderPainted(false);
         jButton3.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2411,10 +2413,11 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
         jToolBar1.setMinimumSize(new java.awt.Dimension(397, 40));
-        jToolBar1.setPreferredSize(new java.awt.Dimension(200, 35));
+        jToolBar1.setPreferredSize(new java.awt.Dimension(220, 35));
 
         cmdSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/save.png"))); // NOI18N
         cmdSave.setToolTipText(bundle.getString("VM_Speichern")); // NOI18N
+        cmdSave.setBorderPainted(false);
         cmdSave.setPreferredSize(new java.awt.Dimension(28, 25));
         cmdSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2425,6 +2428,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         cmdUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/edit-undo.png"))); // NOI18N
         cmdUndo.setToolTipText(bundle.getString("Rückgängig")); // NOI18N
+        cmdUndo.setBorderPainted(false);
         cmdUndo.setPreferredSize(new java.awt.Dimension(28, 25));
         cmdUndo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2435,6 +2439,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         cmdRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/edit-redo.png"))); // NOI18N
         cmdRedo.setToolTipText(bundle.getString("Wiederholen")); // NOI18N
+        cmdRedo.setBorderPainted(false);
         cmdRedo.setPreferredSize(new java.awt.Dimension(28, 25));
         cmdRedo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2445,6 +2450,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButtonRefreshVM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/view-refresh.png"))); // NOI18N
         jButtonRefreshVM.setToolTipText(bundle.getString("Reload VM")); // NOI18N
+        jButtonRefreshVM.setBorderPainted(false);
         jButtonRefreshVM.setPreferredSize(new java.awt.Dimension(28, 25));
         jButtonRefreshVM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2455,6 +2461,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/preferences-desktop.png"))); // NOI18N
         jButton2.setToolTipText(bundle.getString("Options")); // NOI18N
+        jButton2.setBorderPainted(false);
         jButton2.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2465,6 +2472,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/variables.png"))); // NOI18N
         jButton5.setToolTipText(bundle.getString("variable_definition")); // NOI18N
+        jButton5.setBorderPainted(false);
         jButton5.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2475,6 +2483,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/Legende.GIF"))); // NOI18N
         jButton6.setToolTipText(bundle.getString("Datentyp-Legende")); // NOI18N
+        jButton6.setBorderPainted(false);
         jButton6.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2492,6 +2501,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButtonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/play24.gif"))); // NOI18N
         jButtonStart.setToolTipText(bundle.getString("Start_VM")); // NOI18N
+        jButtonStart.setBorderPainted(false);
         jButtonStart.setPreferredSize(new java.awt.Dimension(28, 25));
         jButtonStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2502,6 +2512,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButtonDebug.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/startX.png"))); // NOI18N
         jButtonDebug.setToolTipText(bundle.getString("Start_VM_(Debug_Modus)")); // NOI18N
+        jButtonDebug.setBorderPainted(false);
         jButtonDebug.setPreferredSize(new java.awt.Dimension(28, 25));
         jButtonDebug.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2512,6 +2523,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButtonStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/stop24.gif"))); // NOI18N
         jButtonStop.setToolTipText(bundle.getString("Stop_VM")); // NOI18N
+        jButtonStop.setBorderPainted(false);
         jButtonStop.setPreferredSize(new java.awt.Dimension(28, 25));
         jButtonStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2522,6 +2534,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButtonPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/pause24.gif"))); // NOI18N
         jButtonPause.setToolTipText(bundle.getString("Pause_VM")); // NOI18N
+        jButtonPause.setBorderPainted(false);
         jButtonPause.setPreferredSize(new java.awt.Dimension(28, 25));
         jButtonPause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2532,6 +2545,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButtonResume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/Resume.GIF"))); // NOI18N
         jButtonResume.setToolTipText(bundle.getString("Weiter_VM")); // NOI18N
+        jButtonResume.setBorderPainted(false);
         jButtonResume.setPreferredSize(new java.awt.Dimension(28, 25));
         jButtonResume.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2542,6 +2556,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButtonStep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/Step24.PNG"))); // NOI18N
         jButtonStep.setToolTipText(bundle.getString("Schritt_VM")); // NOI18N
+        jButtonStep.setBorderPainted(false);
         jButtonStep.setPreferredSize(new java.awt.Dimension(28, 25));
         jButtonStep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2558,6 +2573,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/graphDouble.gif"))); // NOI18N
         jButton9.setToolTipText(bundle.getString("NumerikGraphWindow")); // NOI18N
+        jButton9.setBorderPainted(false);
         jButton9.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2568,6 +2584,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/graphBoolean.gif"))); // NOI18N
         jButton8.setToolTipText(bundle.getString("DigitalGraphWindow")); // NOI18N
+        jButton8.setBorderPainted(false);
         jButton8.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2578,6 +2595,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/testpoint.PNG"))); // NOI18N
         jButton7.setToolTipText(bundle.getString("TestpointWindow")); // NOI18N
+        jButton7.setBorderPainted(false);
         jButton7.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2587,6 +2605,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jToolBar3.add(jButton7);
 
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/utilities-terminal.png"))); // NOI18N
+        jButton12.setBorderPainted(false);
         jButton12.setPreferredSize(new java.awt.Dimension(28, 25));
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2638,6 +2657,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jSplitPane3.setPreferredSize(new java.awt.Dimension(550, 62));
 
         jPanelLeft.setMinimumSize(new java.awt.Dimension(100, 12));
+        jPanelLeft.setPreferredSize(new java.awt.Dimension(300, 257));
         jPanelLeft.setLayout(new java.awt.BorderLayout());
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -2736,7 +2756,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         pnlStatus.setPreferredSize(new java.awt.Dimension(100, 30));
         pnlStatus.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lblStatus.setText(bundle.getString("FrameMain.lblStatus.text")); // NOI18N
+        lblStatus.setText("null");
         pnlStatus.add(lblStatus);
 
         getContentPane().add(pnlStatus, java.awt.BorderLayout.SOUTH);
@@ -2989,7 +3009,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jMenuBar2.add(jmnuVM);
 
-        jmnuExtras.setText(bundle.getString("FrameMain.jmnuExtras.text")); // NOI18N
+        jmnuExtras.setText("null");
         jmnuExtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmnuExtrasActionPerformed(evt);
@@ -3121,7 +3141,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.setText(bundle.getString("Hilfe")); // NOI18N
 
         jmiHomepage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiHomepage.setText(bundle.getString("FrameMain.jmiHomepage.text")); // NOI18N
+        jmiHomepage.setText("null");
         jmiHomepage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiHomepageActionPerformed(evt);
@@ -3130,7 +3150,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.add(jmiHomepage);
 
         jmiForum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiForum.setText(bundle.getString("FrameMain.jmiForum.text")); // NOI18N
+        jmiForum.setText("null");
         jmiForum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiForumActionPerformed(evt);
@@ -3139,7 +3159,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.add(jmiForum);
 
         jmiTutorials.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiTutorials.setText(bundle.getString("FrameMain.jmiTutorials.text")); // NOI18N
+        jmiTutorials.setText("null");
         jmiTutorials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiTutorialsActionPerformed(evt);
@@ -3172,7 +3192,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
     
     private boolean unusedPinsExist()
     {
-        Basis basis = getAktuelleBasis();
+        Basis basis = getAktuelleBasis(); 
         if (basis != null)
         {
             VMObject circuit = basis.getCircuitBasis();
