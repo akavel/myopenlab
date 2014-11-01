@@ -115,7 +115,7 @@ public class VSFlowInfo extends VSObject
         result.name=varName;
         result.datatype=datatype;
         variablenListe.add(result);
-        
+                
         generateVariable(result);
         return result;
     }
@@ -164,14 +164,17 @@ public class VSFlowInfo extends VSObject
     
     public OpenVariable getVariable(String varname)
     {
+        System.out.println("XXXXXXX Suche nach:"+varname);
         varname=varname.trim();
         OpenVariable node;
-        for (int i=0;i<variablenListe.size();i++)
-        {
-            node= (OpenVariable)variablenListe.get(i);
+        for (Object variablenListe1 : variablenListe) {
+            node = (OpenVariable) variablenListe1;
+            
+            System.out.println("XXXXXXX var item:"+node.name);
             
             if (varname.equals(node.name.trim()))
             {
+                System.out.println("XXXXXXX:"+node.name);
                 return node;
             }
         }
@@ -200,7 +203,7 @@ public class VSFlowInfo extends VSObject
                 System.out.println("Error setting Variable");
             }
         } else
-        {
+        {            
          //   Tools.showMessage("Variable \""+varname+"\" not definied! \nPlease define the variable");
         }
 

@@ -2311,6 +2311,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmiHomepage = new javax.swing.JMenuItem();
         jmiForum = new javax.swing.JMenuItem();
         jmiTutorials = new javax.swing.JMenuItem();
+        jmiMantis = new javax.swing.JMenuItem();
         jmniUpdate = new javax.swing.JMenuItem();
         jmiInfo = new javax.swing.JMenuItem();
 
@@ -2635,7 +2636,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jPanel3.add(jLabel2);
 
         jSpinner1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jSpinner1.setPreferredSize(new java.awt.Dimension(60, 18));
+        jSpinner1.setPreferredSize(new java.awt.Dimension(60, 22));
         jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSpinner1StateChanged(evt);
@@ -2652,6 +2653,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         getContentPane().add(jPanel5, java.awt.BorderLayout.NORTH);
 
+        jSplitPane3.setBorder(null);
         jSplitPane3.setDividerLocation(150);
         jSplitPane3.setMinimumSize(new java.awt.Dimension(200, 66));
         jSplitPane3.setPreferredSize(new java.awt.Dimension(550, 62));
@@ -2705,6 +2707,8 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jSplitPane1.setRightComponent(jPanelPE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 0));
         jPanel1.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
             public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
@@ -2742,7 +2746,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jSplitPane3.setLeftComponent(jPanelLeft);
 
-        paneRight.setBackground(new java.awt.Color(255, 255, 255));
+        paneRight.setBackground(new java.awt.Color(237, 237, 237));
         paneRight.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 paneRightStateChanged(evt);
@@ -3009,7 +3013,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jMenuBar2.add(jmnuVM);
 
-        jmnuExtras.setText("null");
+        jmnuExtras.setText(bundle.getString("FrameMain.jmnuExtras.text_1")); // NOI18N
         jmnuExtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmnuExtrasActionPerformed(evt);
@@ -3141,7 +3145,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.setText(bundle.getString("Hilfe")); // NOI18N
 
         jmiHomepage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiHomepage.setText("null");
+        jmiHomepage.setText(bundle.getString("FrameMain.jmiHomepage.text_1")); // NOI18N
         jmiHomepage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiHomepageActionPerformed(evt);
@@ -3150,7 +3154,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.add(jmiHomepage);
 
         jmiForum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiForum.setText("null");
+        jmiForum.setText(bundle.getString("FrameMain.jmiForum.text_1")); // NOI18N
         jmiForum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiForumActionPerformed(evt);
@@ -3159,13 +3163,22 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.add(jmiForum);
 
         jmiTutorials.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiTutorials.setText("null");
+        jmiTutorials.setText(bundle.getString("FrameMain.jmiTutorials.text_1")); // NOI18N
         jmiTutorials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiTutorialsActionPerformed(evt);
             }
         });
         jmnuHelp.add(jmiTutorials);
+
+        jmiMantis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
+        jmiMantis.setText(bundle.getString("FrameMain.jmiMantis.text")); // NOI18N
+        jmiMantis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiMantisActionPerformed(evt);
+            }
+        });
+        jmnuHelp.add(jmiMantis);
 
         jmniUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/system-software-update.png"))); // NOI18N
         jmniUpdate.setText(bundle.getString("Update")); // NOI18N
@@ -5169,7 +5182,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
     private void jmiTutorialsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiTutorialsActionPerformed
     {//GEN-HEADEREND:event_jmiTutorialsActionPerformed
 
-        Tools.openUrl(this, "http://www.myopenlab.de/Tutorials.html");
+        Tools.openUrl(this, "http://www.myopenlab.de/startseite/tutorials.html");
         
     }//GEN-LAST:event_jmiTutorialsActionPerformed
 
@@ -6144,6 +6157,10 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         
     }//GEN-LAST:event_jButtonStartActionPerformed
 
+    private void jmiMantisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMantisActionPerformed
+        Tools.openUrl(this, "http://mantis.myopenlab.de");
+    }//GEN-LAST:event_jmiMantisActionPerformed
+
     int beginIndex = 0;
     int index=0;
     
@@ -6280,7 +6297,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
                 {
                     w = 150;
                 }
-                docFrame.setSize(w, 60 + img.getHeight(null));
+                docFrame.setSize(w+20, 60 + img.getHeight(null)+30);
                 int diff = docFrame.getWidth() - oldW;
                 docFrame.setLocation(docFrame.getLocation().x - diff, docFrame.getLocation().y);
             }
@@ -6354,6 +6371,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
     private javax.swing.JMenuItem jmiHomepage;
     private javax.swing.JMenuItem jmiInfo;
     private javax.swing.JMenuItem jmiLegend;
+    private javax.swing.JMenuItem jmiMantis;
     private javax.swing.JMenuItem jmiNewProject;
     private javax.swing.JMenuItem jmiOpenProject;
     private javax.swing.JMenuItem jmiPaste;

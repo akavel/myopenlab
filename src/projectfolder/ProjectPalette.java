@@ -609,6 +609,8 @@ public class ProjectPalette extends javax.swing.JPanel
         });
         popupMenuDir.add(jmniPaste);
 
+        jScrollPane1.setBorder(null);
+
         jTree1.setDragEnabled(true);
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

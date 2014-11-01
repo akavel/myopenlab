@@ -227,8 +227,9 @@ public class ElementPalette extends javax.swing.JPanel {
 
     private void addButton(JButton button) {
         jPanelButtons.add(button);
+        
         if (jToggleButton1.isSelected()) {
-            button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+            button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);            
         } else {
             button.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         }
@@ -251,6 +252,7 @@ public class ElementPalette extends javax.swing.JPanel {
         aktuellesVerzeichniss = path;
 
         MyButton backbtn = createBackButton();
+        backbtn.setBackground(new Color(255,255,255));
         addButton(backbtn);
         //jPanelButtons.add(backbtn);
 
@@ -284,6 +286,7 @@ public class ElementPalette extends javax.swing.JPanel {
 
                     if (!gruppenAuswahlMode && !props.isDirectory && (props.classcircuit.length() > 0 || props.classfront.length() > 0 || props.vm.length() > 0 || props.loader.length() > 0)) {
                         MyButton btn = new MyButton();
+                        
                         btn.setPreferredSize(new Dimension(38, 38));
 
                         // Lade das Icons
@@ -331,6 +334,7 @@ public class ElementPalette extends javax.swing.JPanel {
                         // setzen des Icons zum Button
                         ImageIcon icon = new ImageIcon(img);
                         btn.setIcon(icon);
+                        btn.setBackground(new Color(255,255,255));
                         btn.setToolTipText(props.captionInternationalized);
 
                         btn.filePath = file.getAbsolutePath();
@@ -556,9 +560,9 @@ public class ElementPalette extends javax.swing.JPanel {
 
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 25));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setText("jLabel1");
-        jLabel1.setPreferredSize(new java.awt.Dimension(34, 15));
+        jLabel1.setPreferredSize(new java.awt.Dimension(34, 22));
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/Text.png"))); // NOI18N
         jToggleButton1.setToolTipText(bundle.getString("Show_Item_Names")); // NOI18N
@@ -589,19 +593,20 @@ public class ElementPalette extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
                 .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(2, 2, 2)
                 .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(14, 14, 14)
-                .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
-                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(29, 29, 29))
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jToggleButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(33, 33, 33))
         );
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
@@ -629,16 +634,18 @@ public class ElementPalette extends javax.swing.JPanel {
             }
         });
         jPanelButtons.add(jButton7);
-        jButton7.setBounds(2, 2, 53, 23);
+        jButton7.setBounds(2, 2, 51, 23);
 
+        jButton8.setBackground(new java.awt.Color(240, 240, 24));
         jButton8.setText("XXX");
+        jButton8.setBorder(null);
         jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton8MousePressed(evt);
             }
         });
         jPanelButtons.add(jButton8);
-        jButton8.setBounds(57, 2, 53, 23);
+        jButton8.setBounds(57, 2, 19, 15);
 
         jButton10.setText("XXX");
         jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -647,7 +654,7 @@ public class ElementPalette extends javax.swing.JPanel {
             }
         });
         jPanelButtons.add(jButton10);
-        jButton10.setBounds(112, 2, 53, 23);
+        jButton10.setBounds(112, 2, 51, 23);
 
         jButton11.setText("XXX");
         jButton11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -656,7 +663,7 @@ public class ElementPalette extends javax.swing.JPanel {
             }
         });
         jPanelButtons.add(jButton11);
-        jButton11.setBounds(2, 27, 53, 23);
+        jButton11.setBounds(2, 27, 51, 23);
 
         jButton12.setText("XXX");
         jButton12.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -665,7 +672,7 @@ public class ElementPalette extends javax.swing.JPanel {
             }
         });
         jPanelButtons.add(jButton12);
-        jButton12.setBounds(57, 27, 53, 23);
+        jButton12.setBounds(57, 27, 51, 23);
 
         jButton13.setText("XXX");
         jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -674,7 +681,7 @@ public class ElementPalette extends javax.swing.JPanel {
             }
         });
         jPanelButtons.add(jButton13);
-        jButton13.setBounds(112, 27, 53, 23);
+        jButton13.setBounds(112, 27, 51, 23);
 
         jScrollPane1.setViewportView(jPanelButtons);
 
@@ -682,20 +689,6 @@ public class ElementPalette extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jToggleButton1ActionPerformed
-    {//GEN-HEADEREND:event_jToggleButton1ActionPerformed
-        loadFolder(aktuellesVerzeichniss);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
-        loadFolder(aktuellesVerzeichniss);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jToggleButton1StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jToggleButton1StateChanged
-    {//GEN-HEADEREND:event_jToggleButton1StateChanged
-    }//GEN-LAST:event_jToggleButton1StateChanged
 
     private void jPanelButtonsComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelButtonsComponentResized
         reorderButtons();
@@ -927,6 +920,19 @@ public class ElementPalette extends javax.swing.JPanel {
         modus = MODE_COPY;
         modusCut = false;
     }//GEN-LAST:event_jmiCopyActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        loadFolder(aktuellesVerzeichniss);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jToggleButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton1StateChanged
+
+    }//GEN-LAST:event_jToggleButton1StateChanged
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        loadFolder(aktuellesVerzeichniss);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;

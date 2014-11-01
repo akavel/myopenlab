@@ -163,7 +163,7 @@ public class RS232 implements MyOpenLabDriverIF {
             int stopBits = (Integer) args.get(3);
             int parity = (Integer) args.get(4);
 
-            boolean useOwnInHandler = true;
+            boolean useOwnInHandler = false;
             if (args.size() == 6) {
                 useOwnInHandler = (Boolean) args.get(5);
             }

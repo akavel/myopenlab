@@ -90,6 +90,10 @@ public class RS232 extends JVSMain implements MyOpenLabDriverOwnerIF
           if (out != null) out.close();
       }
   }
+    @Override
+    public void getSingleByte(int val) {
+      
+    }
 
 
   public void setPropertyEditor()
