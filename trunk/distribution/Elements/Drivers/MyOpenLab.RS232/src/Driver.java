@@ -103,11 +103,12 @@ public class Driver {
             out = serss.getOutputStream();
 
             if (useOwnInHandler) {
-
+				System.out.println("useOwnInHandler");
                 serialThread = new SerialReader();
                 serialThread.in = ins;
                 serialThread.start();
             } else {
+				System.out.println("not useOwnInHandler");
                 serss.addEventListener(new commListener());
                 serss.notifyOnDataAvailable(true);
             }
@@ -233,7 +234,9 @@ public class Driver {
 
     class MyThread extends Thread {
 
+	
         public void run() {
+		System.out.println("RXTX: STARTT");
             while (true) {
                 long time2 = System.currentTimeMillis();
 
@@ -254,7 +257,7 @@ public class Driver {
             for (int i = 0; i < strBuffer.size(); i++) {
                 buff[i] = strBuffer.get(i).byteValue();
             }
-            //System.out.println("RXTX:" + new String(strBuffer.toString()));
+            System.out.println("RXTX:" + new String(strBuffer.toString()));
 
             strBuffer.clear();
 
@@ -307,6 +310,8 @@ public class Driver {
 
     class commListener implements SerialPortEventListener {
 
+		
+	
         int dato = 0;
 
         @Override

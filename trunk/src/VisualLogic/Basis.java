@@ -2463,10 +2463,10 @@ public class Basis extends Object implements ElementIF, VSBasisIF
             
             parser.delErrorMessage();
             
-            if (expression.equalsIgnoreCase("i=i+1"))
+            /*if (expression.equalsIgnoreCase("i=i+1"))
             {
                 System.out.println("");
-            }
+            }*/
             Object o=parser.parseString(expression);
             
             String err=parser.getErrorMessage().trim();

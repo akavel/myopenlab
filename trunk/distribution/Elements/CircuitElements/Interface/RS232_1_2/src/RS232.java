@@ -74,7 +74,11 @@ public class RS232 extends JVSMain implements MyOpenLabDriverOwnerIF
     }
   }
 
-  
+    @Override
+    public void getSingleByte(int val) {
+
+    }
+
   public  void copyFile(File source, File dest) throws IOException
   {
       FileChannel in = null, out = null;
