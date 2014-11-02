@@ -20,9 +20,7 @@
         <copy file="RXTXcomm.jar" tofile="bin/RXTXcomm.jar"/>
         <copydir src="build/classes/" dest="bin"  />
         
-        <copy file="src/doc/doc.html" tofile="bin/doc.html"/>
-        <copy file="src/doc/doc_en.html" tofile="bin/doc_en.html"/>
-        <copy file="src/doc/doc_es.html" tofile="bin/doc_es.html"/>
+        <copydir src="src/doc" dest="bin"  />
     </target>
       
     
