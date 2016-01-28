@@ -36,10 +36,12 @@ import VisualLogic.variables.VSProperties;
 import VisualLogic.variables.VSPropertyDialog;
 import VisualLogic.variables.VSString;
 import java.awt.Color;
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 public class PropertyEditorItem
@@ -92,7 +94,14 @@ public class PropertyEditorItem
                
         
         label=new JLabel(strLabel);
-        label.setBorder(new LineBorder(Color.BLACK));
+        //label.setBorder(new LineBorder(Color.lightGray));
+        
+        EmptyBorder eBorder = new EmptyBorder(2, 5, 2, 5); // oben, rechts, unten, links 
+        LineBorder lBorder = new LineBorder(new Color(180, 180, 180)); 
+        label.setBorder(BorderFactory.createCompoundBorder(lBorder, eBorder)); 
+
+        
+        
         label.setBackground(Color.WHITE);
         leftPanel.add(label);
         
@@ -176,7 +185,15 @@ public class PropertyEditorItem
         
                
         component.setEnabled(editable);
-        component.setBorder(new LineBorder(Color.BLACK));
+        
+        
+           
+        EmptyBorder eBorder1 = new EmptyBorder(2, 5, 2, 5); // oben, rechts, unten, links 
+        LineBorder lBorder1 = new LineBorder(new Color(180, 180, 180)); 
+        component.setBorder(BorderFactory.createCompoundBorder(lBorder1, eBorder1)); 
+
+      
+        
         
         rightPanel.add(component);
         
