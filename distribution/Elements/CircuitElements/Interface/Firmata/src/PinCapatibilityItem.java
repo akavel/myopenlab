@@ -13,4 +13,5 @@ public class PinCapatibilityItem {
 
     public int pinCapatibility; // (INPUT/OUTPUT/ANALOG/PWM/SERVO, 0/1/2/3/4)
     public int pinResolution; // ???
+    public int analog_pin=-1; // ???
 }

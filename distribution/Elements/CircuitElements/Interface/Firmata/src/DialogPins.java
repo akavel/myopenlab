@@ -54,6 +54,7 @@ public class DialogPins extends javax.swing.JDialog {
                     JPanel panel = new JPanel();
                     JLabel label_active = new JLabel("Active");
                     JLabel label = new JLabel("Pin " + pinNumber);
+                    JLabel label_analog = new JLabel("Ax ");
                     JLabel label_min = new JLabel("Min Pulse");
                     JLabel label_max = new JLabel("Max Pulse");
 
@@ -92,14 +93,17 @@ public class DialogPins extends javax.swing.JDialog {
                     label_active.setBounds(10, 0, 40, 30);
                     active.setBounds(50, 0, 20, 30);
 
+                    
+                    
                     label.setBounds(80, 0, 40, 30);
-                    combo.setBounds(120, 0, 150, 30);
+                    label_analog.setBounds(120, 0, 40, 30);
+                    combo.setBounds(150, 0, 150, 30);
 
-                    label_min.setBounds(280, 0, 80, 30);
-                    spinner_min.setBounds(340, 0, 100, 30);
+                    label_min.setBounds(300, 0, 80, 30);
+                    spinner_min.setBounds(370, 0, 100, 30);
 
-                    label_max.setBounds(450, 0, 80, 30);
-                    spinner_max.setBounds(510, 0, 100, 30);
+                    label_max.setBounds(480, 0, 80, 30);
+                    spinner_max.setBounds(540, 0, 100, 30);
 
                     active.setName("active");
                     combo.setName("type");
@@ -110,6 +114,7 @@ public class DialogPins extends javax.swing.JDialog {
 
                     panel.add(label_active);
                     panel.add(label);
+                    panel.add(label_analog);
                     panel.add(label_min);
                     panel.add(label_max);
                     panel.add(active);
@@ -327,19 +332,17 @@ public class DialogPins extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 170, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 160, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

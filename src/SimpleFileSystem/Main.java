@@ -21,7 +21,6 @@ package SimpleFileSystem;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import javax.swing.text.SimpleAttributeSet;
 
 /**
  * 
