@@ -27,6 +27,7 @@ public class VSString extends VSObject
     {
     }
     
+    @Override
     public String toString()
     {
         return value;
@@ -51,6 +52,7 @@ public class VSString extends VSObject
         this.value=value;
     }
     
+    @Override
     public void copyValueFrom(Object in)
     {
         if (in!=null)
@@ -61,12 +63,14 @@ public class VSString extends VSObject
         }
         else value="";
     }
+    @Override
     public void copyReferenceFrom(Object in)
     {
       copyValueFrom(in);
     }    
         
     
+    @Override
     public boolean equals(VSObject obj)
     {
         VSString temp =(VSString)obj;
@@ -74,6 +78,7 @@ public class VSString extends VSObject
         else return false;
     }
     
+    @Override
     public boolean isBigger(VSObject obj)
     {
         VSString temp =(VSString)obj;
@@ -81,6 +86,7 @@ public class VSString extends VSObject
         else return false;
     }
     
+    @Override
     public boolean isSmaller(VSObject obj)
     {
         VSString temp =(VSString)obj;
@@ -89,6 +95,7 @@ public class VSString extends VSObject
     }
     
     
+    @Override
     public void loadFromStream(java.io.FileInputStream fis)
     {
         try
@@ -104,6 +111,7 @@ public class VSString extends VSObject
         
     }
     
+    @Override
     public void saveToStream(java.io.FileOutputStream fos)
     {
         try
