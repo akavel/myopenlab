@@ -923,8 +923,8 @@ public class Basis extends Object implements ElementIF, VSBasisIF
             
             circuitBasis= new VMObject(this, elementPath);
             circuitBasis.setRasterOn(false);
-            circuitBasis.setSize(2000,2000);
-            circuitBasis.setPreferredSize(new Dimension(2000,2000));
+            circuitBasis.setSize(4000,2000);
+            circuitBasis.setPreferredSize(new Dimension(4000,2000));
             circuitBasis.setBackground(Color.white);
             
             

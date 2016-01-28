@@ -29,6 +29,7 @@ import java.awt.image.*;
 //import com.sun.image.codec.jpeg.*;
 
 import VisualLogic.variables.*;
+import VisualLogic.variables.VSString;
 import BasisStatus.StatusMoveElements;
 import BasisStatus.StatusAddWire;
 import BasisStatus.StatusIdle;
