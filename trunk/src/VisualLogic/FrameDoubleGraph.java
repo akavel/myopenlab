@@ -231,6 +231,7 @@ public class FrameDoubleGraph extends javax.swing.JFrame
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSpinner3StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jSpinner3StateChanged

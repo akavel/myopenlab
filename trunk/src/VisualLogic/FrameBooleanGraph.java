@@ -218,8 +218,8 @@ public class FrameBooleanGraph extends javax.swing.JFrame
                 .add(myGraph1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-549)/2, (screenSize.height-320)/2, 549, 320);
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSpinner3StateChanged(javax.swing.event.ChangeEvent evt)//GEN-FIRST:event_jSpinner3StateChanged

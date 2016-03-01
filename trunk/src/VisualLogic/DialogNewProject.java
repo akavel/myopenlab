@@ -226,8 +226,8 @@ public class DialogNewProject extends javax.swing.JDialog
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-617)/2, (screenSize.height-227)/2, 617, 227);
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
     

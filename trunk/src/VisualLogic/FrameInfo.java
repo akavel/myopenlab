@@ -576,7 +576,7 @@ public class FrameInfo extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(568, 473));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -34,7 +34,7 @@ public class Settings implements Serializable
     public String currentDirectory=".";
     public String lookAndFeel=UIManager.getCrossPlatformLookAndFeelClassName();
     public Point docLocation = new Point(500,100);
-    public Dimension docDimension = new Dimension(200,150);
+    public Dimension docDimension = new Dimension(300,250);
     public int basisWindow_LeftWidth=120;
     public int rightSplitterPos=150;
     public String elementPalettePath="";

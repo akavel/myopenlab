@@ -252,7 +252,16 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
         }
     }
 
-    public void analogWrite(int pin, int value) {
+    /*
+        public static int LSB(int value) {
+        return value & 0x7F;
+    }
+
+    public static int MSB(int value) {
+        return (value >> 7) & 0x7F;
+    }
+     */
+ public void analogWriteold(int pin, int value) {
 
         // Only Send Pin when Changed!
         if (oldAnalogPin[pin] != value) {
@@ -262,6 +271,28 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
                 (byte) (Constanten.ANALOG_MESSAGE | (pin & 0x0F)),
                 (byte) (value & 0x7F),
                 (byte) (value >> 7)});
+
+            if (driver != null) {
+                driver.sendCommand(comport.getItem(comport.selectedIndex) + ";SENDBYTES", inBytes);
+            }
+        }
+    }
+    
+    // Extended Analog Write above pin 15!!!
+    public void analogWrite(int pin, int value) {
+
+        // Only Send Pin when Changed!
+        if (oldAnalogPin[pin] != value) {
+            oldAnalogPin[pin] = value;
+            
+            inBytes.setBytes(new byte[]{
+                (byte) (0xF0),
+                (byte) (0x6F),
+                (byte) pin,
+                (byte) (value & 0x7F),
+                (byte) (value >> 7),
+                (byte) (0xF7)
+            });
 
             if (driver != null) {
                 driver.sendCommand(comport.getItem(comport.selectedIndex) + ";SENDBYTES", inBytes);
@@ -412,8 +443,6 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
             Thread.sleep(100);
         } catch (InterruptedException ex) {
         }
-
-        
 
     }
 
@@ -606,7 +635,7 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
 
         try {
 
-            Thread.sleep(6000);
+            Thread.sleep(4000);
             queryCapatibilities();
             Thread.sleep(1000);
 
@@ -1059,9 +1088,8 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
 
             Thread.sleep(4000);
 
-
             queryCapatibilities();
-            
+
             //init();
             initAllPins();
 
@@ -1200,7 +1228,7 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
                             }
                         }
                     }
-                   // element.jConsolePrintln("Min Analog Pin No=" + minPinAnalog);
+                    // element.jConsolePrintln("Min Analog Pin No=" + minPinAnalog);
 
                     command = 0;
                     counter = 0;
@@ -1339,7 +1367,6 @@ public class Firmata extends JVSMain implements MyOpenLabDriverOwnerIF {
                     int pinNr = minPinAnalog + (command - 0xE0);
 
                     //element.jConsolePrintln("pin=" + pinNr + "-> value=" + valuex);
-
                     oldAnalogValue[pinNr] = valuex;
 
                     command = 0;
