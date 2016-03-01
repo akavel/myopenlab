@@ -77,6 +77,7 @@ import ParserCode.*;
 import javax.swing.JDialog;
 import javax.swing.JTree;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 class MyButtonX extends JButton {
 
@@ -934,7 +935,6 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
             double time2 = System.currentTimeMillis() - time1;
 
             //lblStatus.setText(java.util.ResourceBundle.getBundle("VisualLogic/Messages").getString("Basis loading Time") + time2 + " ms");
-
             basis.isFileLoaded = true;
             //if (basisPanelVisible)
             {
@@ -1184,7 +1184,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
     }
 
-    public FrameMain() {
+    public FrameMain(String args[]) {
 
         //JDialog.setDefaultLookAndFeelDecorated(true);
         driverPath = elementPath + "/Drivers";
@@ -1269,7 +1269,11 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         jDocVisible.setSelected(settings.isDocWindowsVisible);
 
-        activate_DocFrame(null);
+        if (args.length >= 2 && args[2].equalsIgnoreCase( "runtime=true")) {
+            
+        } else {
+            activate_DocFrame(null);
+        }
 
         //JLayeredPane mnu = getLayeredPane();
         SpinnerNumberModel model = new SpinnerNumberModel(new Integer(100), new Integer(0), new Integer(5000), new Integer(1));
@@ -1391,7 +1395,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
                     jmiSaveAsModul.setEnabled(false);
                     jmiSaveAsJPG.setEnabled(false);
 
-                    jmniElementDocumentation.setEnabled(false);
+                    
                     jDocVisible.setEnabled(false);
                     jmiVariableWatcher.setEnabled(false);
                     jmiShowAnalogWindow.setEnabled(false);
@@ -1401,7 +1405,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
                     return;
                 }
 
-                jmniElementDocumentation.setEnabled(true);
+                
                 jDocVisible.setEnabled(true);
                 jmiVariableWatcher.setEnabled(true);
                 jmiShowAnalogWindow.setEnabled(true);
@@ -1646,10 +1650,12 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
     public static void setLookAndFeel() {
 
+        String nativeLF = UIManager.getSystemLookAndFeelClassName();
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
+            UIManager.setLookAndFeel(nativeLF);
+        } catch (ClassNotFoundException | InstantiationException |
+                IllegalAccessException | UnsupportedLookAndFeelException ex) {
+
         }
 
     }
@@ -1773,7 +1779,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         }
 
         //JFrame.setDefaultLookAndFeelDecorated(false);
-        frm = new FrameMain();
+        frm = new FrameMain(args);
 
         if (args.length >= 2) {
             System.out.println("Arg[1]=" + args[1]);
@@ -1930,7 +1936,6 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmniCreateSubVM = new javax.swing.JMenuItem();
         jmniCreateNewJavaComponent = new javax.swing.JMenuItem();
         jmnuWindow = new javax.swing.JMenu();
-        jmniElementDocumentation = new javax.swing.JMenuItem();
         jDocVisible = new javax.swing.JCheckBoxMenuItem();
         jmiLegend = new javax.swing.JMenuItem();
         jmiVariableWatcher = new javax.swing.JMenuItem();
@@ -2287,7 +2292,6 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
         getContentPane().add(jPanel5, java.awt.BorderLayout.NORTH);
 
-        jSplitPane3.setBorder(null);
         jSplitPane3.setDividerLocation(150);
         jSplitPane3.setMinimumSize(new java.awt.Dimension(200, 66));
         jSplitPane3.setPreferredSize(new java.awt.Dimension(550, 62));
@@ -2683,16 +2687,6 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jMenuBar2.add(jmnuExtras);
 
         jmnuWindow.setText(bundle.getString("Fenster")); // NOI18N
-
-        jmniElementDocumentation.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
-        jmniElementDocumentation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/book.png"))); // NOI18N
-        jmniElementDocumentation.setText(bundle.getString("Element_Documentation")); // NOI18N
-        jmniElementDocumentation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmniElementDocumentationActionPerformed(evt);
-            }
-        });
-        jmnuWindow.add(jmniElementDocumentation);
 
         jDocVisible.setText(bundle.getString("Element_Fenster")); // NOI18N
         jDocVisible.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/elementWindow.png"))); // NOI18N
@@ -4606,9 +4600,11 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         if (!destDir.exists()) {
             destDir.mkdir();
         }
-        try {
-
+        try {            
             Tools.copy(new File(elementPath + "\\..\\DistributionStarter.jar"), new File(destDir + "\\DistributionStarter.jar"));
+            
+            Tools.copy(new File(elementPath + "\\..\\rxtxSerial.dll"), new File(destDir + "\\rxtxSerial.dll"));
+            Tools.copy(new File(elementPath + "\\..\\rxtxParallel.dll"), new File(destDir + "\\rxtxParallel.dll"));
 
             Tools.saveText(new File(destDir + "\\start.bat"), "java -jar DistributionStarter.jar .");
 
@@ -4750,6 +4746,8 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
                 element = basis.getCircuitBasis().getSelectedElement();
             }
             activate_DocFrame(element);
+                        
+            
             docFrame.setLocation(settings.docLocation);
             docFrame.setSize(settings.docDimension);
             if (docFrame.getWidth() < 50) {
@@ -4771,18 +4769,6 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
             docFrame = null;
         }
     }//GEN-LAST:event_jDocVisibleActionPerformed
-
-    private void jmniElementDocumentationActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmniElementDocumentationActionPerformed
-    {//GEN-HEADEREND:event_jmniElementDocumentationActionPerformed
-        if (getVMObject() != null) {
-            Element element = getVMObject().getSelectedElement();
-            Basis basis = getAktuelleBasis();
-
-            if (element != null) {
-                basis.ownerVMPanel.openElementDocFile(element);
-            }
-        }
-    }//GEN-LAST:event_jmniElementDocumentationActionPerformed
 
     private void jPanelElementPaletteComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelElementPaletteComponentResized
 // TODO add your handling code here:
@@ -5499,6 +5485,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
     }
 
     public void activate_DocFrame(Element element) {
+        
         if (jDocVisible.isSelected()) {
             if (docFrame == null) {
                 docFrame = new FrameDoc(this);
@@ -5516,6 +5503,13 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
             }
 
             if (element != null) {
+                
+                try {
+                    docFrame.panel.openElementDocFile(element);
+                } catch (Exception ex) {
+                    Logger.getLogger(FrameMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 Image img;
 
                 if (element.owner.equals(getAktuelleBasis().getCircuitBasis())) {
@@ -5531,7 +5525,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
                 if (w < 150) {
                     w = 150;
                 }
-                docFrame.setSize(w + 20, 60 + img.getHeight(null) + 30);
+                //docFrame.setSize(w + 20, 60 + img.getHeight(null) + 30);
                 int diff = docFrame.getWidth() - oldW;
                 docFrame.setLocation(docFrame.getLocation().x - diff, docFrame.getLocation().y);
             }
@@ -5629,7 +5623,6 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
     private javax.swing.JMenuItem jmniCreateSubVM;
     private javax.swing.JMenuItem jmniDefineVariables;
     private javax.swing.JMenuItem jmniDeletePasswordProtection;
-    private javax.swing.JMenuItem jmniElementDocumentation;
     private javax.swing.JMenuItem jmniOptions;
     private javax.swing.JMenuItem jmniPasswordProtection;
     private javax.swing.JMenuItem jmniPrintVM;

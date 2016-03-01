@@ -183,7 +183,7 @@ public class DialogVariables extends javax.swing.JDialog
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(345, 301));
+        pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

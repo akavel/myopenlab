@@ -2,4 +2,4 @@ ISDIRECTORY = TRUE
 CAPTION	    = Canvas
 CAPTION_EN  = Canvas
 CAPTION_ES  = Canvas
-Icon        = Icon32.png
+Icon        = icon32.png

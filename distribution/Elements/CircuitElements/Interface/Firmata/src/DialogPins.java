@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,8 +28,16 @@ import javax.swing.JSpinner;
 public class DialogPins extends javax.swing.JDialog {
 
     public String result = "";
-
     private ArrayList<JPanel> pin_panels = new ArrayList();
+    
+    public static boolean inArray(String[] arr, String targetValue) {
+	for(String s: arr){
+		if(s.equals(targetValue))
+			return true;
+	}
+	return false;
+}
+
 
     private void erstellePinCombos(String capatibilities) {
         int counter = 10;
@@ -35,6 +46,7 @@ public class DialogPins extends javax.swing.JDialog {
 
         jLabel1.setText(cap_rows[0]);
 
+        int a_counter=0;
         for (int i = 1; i < cap_rows.length; i++) {
 
             String row = cap_rows[i];
@@ -54,7 +66,16 @@ public class DialogPins extends javax.swing.JDialog {
                     JPanel panel = new JPanel();
                     JLabel label_active = new JLabel("Active");
                     JLabel label = new JLabel("Pin " + pinNumber);
+                    
+                    
                     JLabel label_analog = new JLabel("Ax ");
+                    if (inArray(options, "ANALOG_INPUT")) {
+                        label_analog.setText("A"+a_counter);
+                        a_counter++;
+                    }else {
+                        label_analog.setText("");
+                    }
+                    
                     JLabel label_min = new JLabel("Min Pulse");
                     JLabel label_max = new JLabel("Max Pulse");
 
@@ -72,6 +93,7 @@ public class DialogPins extends javax.swing.JDialog {
                     spinner_max.setEditor(new javax.swing.JSpinner.NumberEditor(spinner_max, ""));
 
                     ((JSpinner.DefaultEditor) spinner_min.getEditor()).getTextField().addKeyListener(new KeyAdapter() {
+                        @Override
                         public void keyTyped(KeyEvent e) {
                             if (Character.isLetter(e.getKeyChar())) {
                                 e.consume();
@@ -80,6 +102,7 @@ public class DialogPins extends javax.swing.JDialog {
                     });
 
                     ((JSpinner.DefaultEditor) spinner_max.getEditor()).getTextField().addKeyListener(new KeyAdapter() {
+                        @Override
                         public void keyTyped(KeyEvent e) {
                             if (Character.isLetter(e.getKeyChar())) {
                                 e.consume();
@@ -87,17 +110,16 @@ public class DialogPins extends javax.swing.JDialog {
                         }
                     });
 
-                    panel.setBounds(0, counter, 620, 30);
+                    panel.setBounds(0, counter, 640, 30);
                     panel.setLayout(null);
 
-                    label_active.setBounds(10, 0, 40, 30);
+                    label.setBounds(10, 0, 40, 30);
                     active.setBounds(50, 0, 20, 30);
-
                     
+                    label_active.setBounds(70, 0, 40, 30);
+                    label_analog.setBounds(110, 0, 40, 30);
                     
-                    label.setBounds(80, 0, 40, 30);
-                    label_analog.setBounds(120, 0, 40, 30);
-                    combo.setBounds(150, 0, 150, 30);
+                    combo.setBounds(140, 0, 150, 30);
 
                     label_min.setBounds(300, 0, 80, 30);
                     spinner_min.setBounds(370, 0, 100, 30);
@@ -130,6 +152,7 @@ public class DialogPins extends javax.swing.JDialog {
                     spinner_max.setVisible(false);
 
                     combo.addActionListener(new ActionListener() {
+                        @Override
                         public void actionPerformed(ActionEvent e) {
 
                             JComboBox combo = (JComboBox) e.getSource();
@@ -158,7 +181,7 @@ public class DialogPins extends javax.swing.JDialog {
                     });
 
                     jPanel1.add(panel);
-                    counter += 40;
+                    counter += 38;
 
                     pin_panels.add(panel);
 
@@ -187,10 +210,7 @@ public class DialogPins extends javax.swing.JDialog {
 
         String rows[] = settings.split("\n");
 
-        for (int i = 0; i < rows.length; i++) {
-
-            String row = rows[i];
-
+        for (String row : rows) {
             String cols[] = row.split("=");
 
             if (cols.length == 2) {
@@ -274,7 +294,7 @@ public class DialogPins extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Pin Editor");
+        setTitle("Firmata Pin Editor");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -337,7 +357,7 @@ public class DialogPins extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 160, Short.MAX_VALUE)
+                        .addGap(0, 215, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -355,7 +375,7 @@ public class DialogPins extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(696, 560));
+        setSize(new java.awt.Dimension(751, 560));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -424,6 +444,7 @@ public class DialogPins extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
 
                 String capatibilities = "Firmata Protocol Version: 2.3 (StandardFirmata.ino)\n"
