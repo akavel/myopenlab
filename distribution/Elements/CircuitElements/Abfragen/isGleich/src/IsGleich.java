@@ -58,7 +58,7 @@ public class IsGleich extends JVSMain
     initPinVisibility(false,true,false,true);
     
     element.jSetInnerBorderVisibility(false);
-    image=element.jLoadImage(element.jGetSourcePath()+"icon.png");
+    image=element.jLoadImage(element.jGetSourcePath()+"isgleich.gif");
     
     
     setPin(0,ExternalIF.C_BOOLEAN,element.PIN_OUTPUT);
