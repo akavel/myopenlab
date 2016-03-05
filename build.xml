@@ -35,17 +35,14 @@
          <copy todir="${temp_dir}" >
             <fileset dir="distribution"/>
         </copy>
-          
-        <!--input 
-          message="Version?"          
-          addproperty="myopenlab_version"
-        /-->
+                  
         <copy todir="${temp_dir}/lib">
             <fileset dir="dist/lib"/>
         </copy>
         
         <delete file="${temp_dir}/start_linux"/>
-        <copy file="dist/myopenlab.jar" tofile="${temp_dir}/myopenlab.jar"/>
+        <delete file="${temp_dir}/myopenlab.jar"/>
+        <copy file="dist/myopenlab.jar" tofile="${temp_dir}/myopenlab.jar" overwrite="true"/>        
         <copy file="${temp_dir}/rxtx/win32/rxtxSerial.dll" tofile="${temp_dir}/rxtxSerial.dll"/>        
         <zip destfile="${zip_file}_${myopenlab_version}.zip" basedir="${temp_dir}" />
         
@@ -65,18 +62,14 @@
          <copy todir="${temp_dir}" >
             <fileset dir="distribution"/>
         </copy>
-            
-          
-        <!--input 
-          message="Version?"          
-          addproperty="myopenlab_version"
-        /-->
+                      
         <copy todir="${temp_dir}/lib">
             <fileset dir="dist/lib"/>
         </copy>
         
         <delete file="${temp_dir}/start_linux"/>
-        <copy file="dist/myopenlab.jar" tofile="${temp_dir}/myopenlab.jar"/>
+        <delete file="${temp_dir}/myopenlab.jar"/>
+        <copy file="dist/myopenlab.jar" tofile="${temp_dir}/myopenlab.jar" overwrite="true"/>        
         <copy file="${temp_dir}/rxtx/win64/rxtxSerial.dll" tofile="${temp_dir}/rxtxSerial.dll"/>        
         <zip destfile="${zip_file}_${myopenlab_version}.zip" basedir="${temp_dir}" />
         
@@ -94,20 +87,21 @@
          
         <mkdir dir="${temp_dir}"/>
           
-         <copy todir="${temp_dir}" >
+        <copy todir="${temp_dir}" >
             <fileset dir="distribution"/>
         </copy>
           
-        <!--input 
-          message="Version?"          
-          addproperty="myopenlab_version"
-        /-->
+        
         <copy todir="${temp_dir}/lib">
             <fileset dir="dist/lib"/>
         </copy>
         
+        
         <delete file="${temp_dir}/start.bat"/>
-        <copy file="dist/myopenlab.jar" tofile="${temp_dir}/myopenlab.jar"/>        
+        <delete file="${temp_dir}/start with JDK.bat"/>
+        <delete file="${temp_dir}/myopenlab.jar"/>
+        
+        <copy file="dist/myopenlab.jar" tofile="${temp_dir}/myopenlab.jar" overwrite="true"/>        
         <copy file="${temp_dir}/rxtx/linux64/RXTXcomm.jar" tofile="${temp_dir}/Elements/Drivers/MyOpenLab.RS232/bin/RXTXcomm.jar"/>        
         <copy file="${temp_dir}/rxtx/linux64/librxtxSerial.so" tofile="${temp_dir}/librxtxSerial.so"/>        
         <copy file="${temp_dir}/rxtx/linux64/librxtxSerial64.so" tofile="${temp_dir}/librxtxSerial64.so"/>        
@@ -116,7 +110,9 @@
         
         <delete includeEmptyDirs="true">
             <fileset dir="${temp_dir}" />
-        </delete>
+        </delete>       
+	
+        
     </target>
     
     
