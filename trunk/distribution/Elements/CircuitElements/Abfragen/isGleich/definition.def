@@ -4,4 +4,4 @@ CAPTION_EN=Compare
 CAPTION_ES=Comparador
 Jar= bin/IsGleich.jar
 classCircuit = IsGleich
-Icon= bin/IsGleich.GIF
+Icon= bin/isgleich.gif
