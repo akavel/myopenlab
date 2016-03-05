@@ -42,7 +42,9 @@ public class SchiebeSchalter extends JVSMain
 
   public void paint(java.awt.Graphics g)
   {
-    drawImageCentred(g,image);
+	  
+      drawImageCentred(g,image);
+    
   }
 
   public void init()
@@ -52,7 +54,7 @@ public class SchiebeSchalter extends JVSMain
     initPinVisibility(false,true,false,false);
 
     setPin(0,ExternalIF.C_BOOLEAN,element.PIN_OUTPUT);
-    
+    	
     image=element.jLoadImage(element.jGetSourcePath()+"SchiebeSchalter.gif");
     setName("Schiebeschalter");
   }
