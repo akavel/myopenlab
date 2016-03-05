@@ -36,6 +36,7 @@ public class Dec extends MainFlow
   private VSFlowInfo in=null;
   private VSFlowInfo out = new VSFlowInfo();
 
+  @Override
   public void paint(java.awt.Graphics g)
   {
      if (element!=null)
