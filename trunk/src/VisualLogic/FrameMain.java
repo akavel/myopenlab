@@ -94,19 +94,19 @@ class MyButtonX extends JButton {
 
 public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, projectfolder.ProjectPaletteIF, ElementPaletteIF, VMEditorPanelIF, StatusGummiBandXBackIF {
 
-    public static String elementPath = "";
-    public String activeElement = "";
+    public static String elementPath = ""; //NOI18N
+    public String activeElement = ""; //NOI18N
     public static FrameMain frm;
     public javax.swing.Timer timer;
-    private String letztesVerzeichniss = ".";
+    private String letztesVerzeichniss = "."; //NOI18N
     public static Image iconImage = null;
     public static URL userURL = null;
-    public String oldCircuitDirectory = "/CircuitElements";
-    public String oldPanelDirectory = "/FrontElements";
+    public String oldCircuitDirectory = "/CircuitElements"; //NOI18N
+    public String oldPanelDirectory = "/FrontElements"; //NOI18N
     private Element oldElement = null;
     public FrameDoc docFrame = null;
     public DialogVariableWatcher watcher = null;
-    public JLabel layedLabel = new JLabel("");
+    public JLabel layedLabel = new JLabel(""); //NOI18N
     public FrameErrorWarnings errorWarnings = new FrameErrorWarnings();
     public boolean frontMode = false;
     public ArrayList<String> projects = new ArrayList<String>();
@@ -127,14 +127,14 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
 
             ProjectProperties props = Tools.openProjectFile(new File(basis.projectPath));
 
-            if (props.projectType.equalsIgnoreCase("SPS")) {
-                elementPaletteCircuit.init(this, elementPath, "/CircuitElements/MCU/StackInterpreter/");
-                elementPaletteFront.init(this, elementPath, "/FrontElements/MCU/Interpreter");
+            if (props.projectType.equalsIgnoreCase("SPS")) { //NOI18N
+                elementPaletteCircuit.init(this, elementPath, "/CircuitElements/MCU/StackInterpreter/"); //NOI18N
+                elementPaletteFront.init(this, elementPath, "/FrontElements/MCU/Interpreter"); //NOI18N
 
             } else {
 
-                elementPaletteCircuit.init(this, elementPath, "/CircuitElements");
-                elementPaletteFront.init(this, elementPath, "/FrontElements");
+                elementPaletteCircuit.init(this, elementPath, "/CircuitElements"); //NOI18N
+                elementPaletteFront.init(this, elementPath, "/FrontElements"); //NOI18N
             }
         }
 
@@ -153,7 +153,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         frmVmName.setVisible(true);
 
         if (frmVmName.result) {
-            String filename = node.projectPath + node.relativePath + "/" + frmVmName.newName + ".vlogic";
+            String filename = node.projectPath + node.relativePath + "/" + frmVmName.newName + ".vlogic"; //NOI18N 
 
             if (!new File(filename).exists()) {
                 Basis basis = new Basis(this, this.elementPath);
@@ -167,13 +167,13 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
     }
 
     public void dirAdd(MyNode node) {
-        String value = JOptionPane.showInputDialog(this, "New Folder", "Folder Name : ", JOptionPane.QUESTION_MESSAGE);
+        String value = JOptionPane.showInputDialog(this, java.util.ResourceBundle.getBundle("VisualLogic/FrameCircuit").getString("NEW FOLDER"), java.util.ResourceBundle.getBundle("VisualLogic/FrameCircuit").getString("FOLDER NAME : "), JOptionPane.QUESTION_MESSAGE);
 
         if (value != null && value.length() > 0) {
             File file = new File(node.projectPath + node.relativePath);
             String projectName = file.getPath();
 
-            new File(projectName + "/" + value).mkdir();
+            new File(projectName + "/" + value).mkdir(); //NOI18N
             reloadProjectPanel();
 
         }
@@ -1700,6 +1700,8 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
             Locale.setDefault(new Locale("es", "ES"));
         }
 
+        errorWarnings= new FrameErrorWarnings();
+
         System.out.println("Locale=" + settings.language);
     }
     public static String arg1;
@@ -2764,7 +2766,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.setText(bundle.getString("Hilfe")); // NOI18N
 
         jmiHomepage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiHomepage.setText(bundle.getString("FrameMain.jmiHomepage.text_1")); // NOI18N
+        jmiHomepage.setText(bundle.getString("FrameMain.jmiHomepage")); // NOI18N
         jmiHomepage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiHomepageActionPerformed(evt);
@@ -2773,7 +2775,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.add(jmiHomepage);
 
         jmiForum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiForum.setText(bundle.getString("FrameMain.jmiForum.text_1")); // NOI18N
+        jmiForum.setText(bundle.getString("FrameMain.jmiForum")); // NOI18N
         jmiForum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiForumActionPerformed(evt);
@@ -2782,7 +2784,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.add(jmiForum);
 
         jmiTutorials.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiTutorials.setText(bundle.getString("FrameMain.jmiTutorials.text_1")); // NOI18N
+        jmiTutorials.setText(bundle.getString("FrameMain.jmiTutorials")); // NOI18N
         jmiTutorials.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiTutorialsActionPerformed(evt);
@@ -2791,7 +2793,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
         jmnuHelp.add(jmiTutorials);
 
         jmiMantis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bilder/16x16/applications-internet.png"))); // NOI18N
-        jmiMantis.setText(bundle.getString("FrameMain.jmiMantis.text")); // NOI18N
+        jmiMantis.setText(bundle.getString("FrameMain.jmiMantis")); // NOI18N
         jmiMantis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiMantisActionPerformed(evt);
@@ -3583,7 +3585,9 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
             //frameCircuit.openJavaEditor(element);
 
         } else {
-            Tools.showMessage(this, "To compile you need Java JDK 1.6 or higher.\nPlease start with JDK.");
+            
+            String message=java.util.ResourceBundle.getBundle("VisualLogic/FrameCircuit").getString("TO_COMPILE_YOU_NEED_JDK");
+            Tools.showMessage(this, message);
         }
     }//GEN-LAST:event_jmniCreateNewJavaComponentActionPerformed
 
@@ -4540,7 +4544,7 @@ public class FrameMain extends javax.swing.JFrame implements MyOpenLabOwnerIF, p
     private void jmiTutorialsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiTutorialsActionPerformed
     {//GEN-HEADEREND:event_jmiTutorialsActionPerformed
 
-        Tools.openUrl(this, "http://www.myopenlab.de/startseite/tutorials.html");
+        Tools.openUrl(this, "http://www.myopenlab.de/downloads.html");
 
     }//GEN-LAST:event_jmiTutorialsActionPerformed
 

@@ -162,8 +162,8 @@ public class StatusIdle extends Object implements StatusBasisIF {
                                 //Custom button text
                                 Object[] options = {"DE","EN","ES"};
                                 int n = JOptionPane.showOptionDialog(null,
-                                        "Witch language you like to edit?",
-                                        "Question",
+                                        java.util.ResourceBundle.getBundle("BasisStatus/StatusIdle").getString("LANGUAGE"),                                        
+                                        java.util.ResourceBundle.getBundle("BasisStatus/StatusIdle").getString("QUESTION"),
                                         JOptionPane.YES_NO_CANCEL_OPTION,
                                         JOptionPane.QUESTION_MESSAGE,
                                         null,

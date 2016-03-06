@@ -608,7 +608,7 @@
                   <Image iconType="3" name="/Bilder/16x16/applications-internet.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiHomepage.text_1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiHomepage" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -621,7 +621,7 @@
                   <Image iconType="3" name="/Bilder/16x16/applications-internet.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiForum.text_1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiForum" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -634,7 +634,7 @@
                   <Image iconType="3" name="/Bilder/16x16/applications-internet.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiTutorials.text_1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiTutorials" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>
@@ -647,7 +647,7 @@
                   <Image iconType="3" name="/Bilder/16x16/applications-internet.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiMantis.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                  <ResourceString bundle="VisualLogic/FrameCircuit.properties" key="FrameMain.jmiMantis" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
               <Events>

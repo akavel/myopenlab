@@ -84,7 +84,7 @@ public class DialogNewProject extends javax.swing.JDialog
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Name and Location"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle.getString("NAME_AND_LOCATION"))); // NOI18N
 
         jLabel1.setText(bundle.getString("Project_Name_:_")); // NOI18N
 
@@ -180,7 +180,7 @@ public class DialogNewProject extends javax.swing.JDialog
 
         jTextField4.setText("Main");
 
-        jCheckSPSProjekt.setText("MyOpenLab SPS Projekt (Experimental)");
+        jCheckSPSProjekt.setText(bundle.getString("MYOPENLAB_SPS_PROJEKT")); // NOI18N
         jCheckSPSProjekt.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jCheckSPSProjekt.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jCheckSPSProjekt.addActionListener(new java.awt.event.ActionListener() {
@@ -202,11 +202,13 @@ public class DialogNewProject extends javax.swing.JDialog
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckSPSProjekt))
+                        .addComponent(jCheckSPSProjekt)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -233,7 +235,7 @@ public class DialogNewProject extends javax.swing.JDialog
     
     private void make()
     {
-        jTextField3.setText(jTextField2.getText()+"\\"+jTextField1.getText());
+        jTextField3.setText(jTextField2.getText()+"\\"+jTextField1.getText()); //NOI18N
     }
     
     
@@ -284,7 +286,7 @@ public class DialogNewProject extends javax.swing.JDialog
         chooser.setDialogTitle(java.util.ResourceBundle.getBundle("VisualLogic/DialogNewProject").getString("Browse..."));
         chooser.setDialogType(JFileChooser.DIRECTORIES_ONLY);
         
-        chooser.setCurrentDirectory(new File("."));
+        chooser.setCurrentDirectory(new File(".")); //NOI18N
         
         //chooser.setFileFilter(filter);
         FileView view = new JavaFileView();
@@ -314,7 +316,7 @@ public class DialogNewProject extends javax.swing.JDialog
                    
         if (jCheckSPSProjekt.isSelected())
         {
-          projectType="SPS";
+          projectType="SPS"; //NOI18N
         }
         projectName=jTextField3.getText();
         if (!new File(projectName).exists())

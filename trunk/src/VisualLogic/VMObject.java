@@ -2478,6 +2478,8 @@ public class VMObject extends JPanel implements MouseListener, MouseMotionListen
 
     public void setModusIdle()
     {
+        
+        
         addWireFrame = null;
         gummiBand = null;
         addElementModus = null;
