@@ -43,7 +43,7 @@ public class FrameDoc extends javax.swing.JDialog {
         
         
         panel = new PanelDokumentation(jTabbedPane1);
-        jTabbedPane1.addTab("Documentation", panel);
+        jTabbedPane1.addTab(java.util.ResourceBundle.getBundle("VisualLogic/FrameDoc").getString("DOCUMENTATION"), panel);
         jTabbedPane1.setSelectedComponent(panel);
         
         jTabbedPane1.setSelectedIndex(0);
@@ -68,7 +68,8 @@ public class FrameDoc extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
         jPanel2.setPreferredSize(new java.awt.Dimension(14, 30));
 
-        jLabel1.setText("Element :");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("VisualLogic/FrameDoc"); // NOI18N
+        jLabel1.setText(bundle.getString("ELEMENT :")); // NOI18N
 
         label.setText("???");
 
@@ -92,7 +93,7 @@ public class FrameDoc extends javax.swing.JDialog {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
-        jTabbedPane1.addTab("Pins", jScrollPane1);
+        jTabbedPane1.addTab(bundle.getString("PINS"), jScrollPane1); // NOI18N
 
         getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 

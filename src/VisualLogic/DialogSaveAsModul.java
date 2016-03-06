@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.net.URL;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 
 /**
  *
@@ -226,7 +225,7 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                 }
                 catch(Exception ex)
                 {
-                    Tools.showMessage("Error: copying icon file!");
+                    Tools.showMessage(java.util.ResourceBundle.getBundle("VisualLogic/DialogSaveAsModul").getString("ERROR: COPYING ICON FILE!"));
                 }
             }
             
@@ -406,31 +405,32 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
             }
         });
 
-        jButton1.setText("Cancel");
+        java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("VisualLogic/DialogSaveAsModul"); // NOI18N
+        jButton1.setText(bundle1.getString("CANCEL")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("OK");
+        jButton2.setText(bundle1.getString("OK")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Name : ");
+        jLabel5.setText(bundle1.getString("NAME : ")); // NOI18N
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Caption"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle1.getString("CAPTION"))); // NOI18N
 
-        jLabel1.setText("German");
+        jLabel1.setText(bundle1.getString("GERMAN")); // NOI18N
 
         txtDE.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jLabel3.setText("English");
+        jLabel3.setText(bundle1.getString("ENGLISH")); // NOI18N
 
-        jLabel4.setText("Spanisch");
+        jLabel4.setText(bundle1.getString("SPANISCH")); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -466,13 +466,13 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Icon"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(bundle1.getString("Icono_caption"))); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setText("Icon");
+        jLabel2.setText(bundle1.getString("ICON")); // NOI18N
 
         txtIcon.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -480,15 +480,15 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
             }
         });
 
-        java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("VisualLogic/frmOptions"); // NOI18N
-        jButton3.setText(bundle1.getString("durchsuchen")); // NOI18N
+        java.util.ResourceBundle bundle2 = java.util.ResourceBundle.getBundle("VisualLogic/frmOptions"); // NOI18N
+        jButton3.setText(bundle2.getString("durchsuchen")); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("edit icon");
+        jButton4.setText(bundle1.getString("EDIT ICON")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -525,14 +525,13 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jButton3)
                             .add(jButton4)))
-                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        java.util.ResourceBundle bundle2 = java.util.ResourceBundle.getBundle("VisualLogic/DialogSaveAsModul"); // NOI18N
-        jCheckBox1.setText(bundle2.getString("resize_proportional")); // NOI18N
+        jCheckBox1.setText(bundle1.getString("resize_proportional")); // NOI18N
         jCheckBox1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jCheckBox1.setMargin(new java.awt.Insets(0, 0, 0, 0));
 
@@ -571,9 +570,9 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Settings", jPanel4);
+        jTabbedPane1.addTab(bundle1.getString("Settings"), jPanel4); // NOI18N
 
-        editorDE.setContentType("text/html");
+        editorDE.setContentType("text/html"); // NOI18N
         jScrollPane1.setViewportView(editorDE);
 
         org.jdesktop.layout.GroupLayout jPanel10Layout = new org.jdesktop.layout.GroupLayout(jPanel10);
@@ -593,9 +592,9 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                 .addContainerGap())
         );
 
-        jTabbedPane2.addTab("German", jPanel10);
+        jTabbedPane2.addTab(bundle1.getString("GERMAN"), jPanel10); // NOI18N
 
-        editorEN.setContentType("text/html");
+        editorEN.setContentType("text/html"); // NOI18N
         jScrollPane2.setViewportView(editorEN);
 
         org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
@@ -615,9 +614,9 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                 .addContainerGap())
         );
 
-        jTabbedPane2.addTab("English", jPanel11);
+        jTabbedPane2.addTab(bundle1.getString("ENGLISH"), jPanel11); // NOI18N
 
-        editorES.setContentType("text/html");
+        editorES.setContentType("text/html"); // NOI18N
         jScrollPane3.setViewportView(editorES);
 
         org.jdesktop.layout.GroupLayout jPanel12Layout = new org.jdesktop.layout.GroupLayout(jPanel12);
@@ -637,7 +636,7 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                 .addContainerGap())
         );
 
-        jTabbedPane2.addTab("Spanish", jPanel12);
+        jTabbedPane2.addTab(bundle1.getString("SPANISCH"), jPanel12); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -645,7 +644,7 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
             jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                .add(jTabbedPane2)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -656,7 +655,7 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Dokumentation", jPanel9);
+        jTabbedPane1.addTab(bundle1.getString("Dokumentation"), jPanel9); // NOI18N
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -665,7 +664,7 @@ public class DialogSaveAsModul extends javax.swing.JDialog implements ElementPal
             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTabbedPane1)
                     .add(layout.createSequentialGroup()
                         .add(jButton2)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)

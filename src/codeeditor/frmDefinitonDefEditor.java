@@ -36,7 +36,7 @@ public class frmDefinitonDefEditor extends javax.swing.JDialog
 {
     public MyImage image = new MyImage();
     
-    String elementDir="";
+    String elementDir=""; //NOI18N
 
     
     /** Creates new form frmDefinitonDefEditor */
@@ -301,7 +301,7 @@ public class frmDefinitonDefEditor extends javax.swing.JDialog
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
                         
 
-        File file = new File(elementDir+"/"+txtIcon.getText());
+        File file = new File(elementDir+"/"+txtIcon.getText()); //NOI18N
 
         Tools.openPaint(file);
         
@@ -309,7 +309,7 @@ public class frmDefinitonDefEditor extends javax.swing.JDialog
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
     {//GEN-HEADEREND:event_jButton3ActionPerformed
-        ImageIcon icon = new ImageIcon(elementDir+"/"+txtIcon.getText());
+        ImageIcon icon = new ImageIcon(elementDir+"/"+txtIcon.getText()); //NOI18N
         image.setImage(icon.getImage());
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -346,7 +346,7 @@ public class frmDefinitonDefEditor extends javax.swing.JDialog
         File file= new File(elementDir);
         DFProperties definition_def =Tools.getProertiesFromDefinitionFile(file);
         
-        ImageIcon icon = new ImageIcon(elementDir+"/"+definition_def.iconFilename);        
+        ImageIcon icon = new ImageIcon(elementDir+"/"+definition_def.iconFilename);         //NOI18N
         image.setImage(icon.getImage());
         
         txtIcon.setText(definition_def.iconFilename);

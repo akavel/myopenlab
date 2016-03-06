@@ -24,7 +24,7 @@ package VisualLogic;
 public class Version 
 {           
     public static String strApplicationTitle="MyOpenLab";
-    public static String strApplicationVersion="3.0.4.6";
+    public static String strApplicationVersion="3.0.5.0";
     public static String strFileVersion="3.14";
     public static String strStatus="";
 }
