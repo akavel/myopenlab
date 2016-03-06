@@ -1,0 +1,6 @@
+ISDIRECTORY  = FALSE
+CAPTION      = Digital Circuit Simulator
+CAPTION_EN   = Digital Circuit Simulator
+CAPTION_ES   = Block Combinational
+ClassCircuit = DigitalCircuitSim
+Icon         = bin/icon.png
