@@ -63,7 +63,8 @@ public class DialogAddEditvariable extends javax.swing.JDialog
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel2.setText("Variablename");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("VisualLogic/DialogAddEditvariable"); // NOI18N
+        jLabel2.setText(bundle.getString("VARIABLENAME")); // NOI18N
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -73,16 +74,16 @@ public class DialogAddEditvariable extends javax.swing.JDialog
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Double", "String", "Boolean" }));
 
-        jLabel1.setText("DataType");
+        jLabel1.setText(bundle.getString("DATATYPE")); // NOI18N
 
-        jButton1.setText("OK");
+        jButton1.setText(bundle.getString("OK")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancel");
+        jButton2.setText(bundle.getString("CANCEL")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -163,7 +164,7 @@ public class DialogAddEditvariable extends javax.swing.JDialog
     public static void executeAdd(java.awt.Frame parent)
     {
         DialogAddEditvariable frm = new DialogAddEditvariable(parent,true);
-        frm.setTitle("Add variable");
+        frm.setTitle(java.util.ResourceBundle.getBundle("VisualLogic/DialogAddEditvariable").getString("ADD VARIABLE"));
         frm.jTextField1.setEnabled(true);
         frm.setVisible(true); 
         
@@ -173,7 +174,7 @@ public class DialogAddEditvariable extends javax.swing.JDialog
     public static void executeEdit(java.awt.Frame parent, OpenVariable node)
     {
         DialogAddEditvariable frm = new DialogAddEditvariable(parent,true);
-        frm.setTitle("Edit variable");        
+        frm.setTitle(java.util.ResourceBundle.getBundle("VisualLogic/DialogAddEditvariable").getString("EDIT VARIABLE"));        
         frm.jTextField1.setText(node.name);
         frm.jComboBox1.setSelectedIndex(node.datatype);
         frm.jTextField1.setEnabled(false);
